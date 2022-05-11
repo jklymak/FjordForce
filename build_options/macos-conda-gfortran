@@ -1,0 +1,23 @@
+#!/bin/bash
+#
+
+CPP='/usr/local/bin/cpp-10 -traditional -P'
+FC=mpif90
+CC=mpicc
+LINK=$FC
+NOOPTFLAGS='-O0'
+MAKEDEPEND='makedepend'
+DEFINES='-DWORDLENGTH=4 -DALWAYS_USE_MPI -DALLOW_USE_MPI'
+INCLUDES='-I/usr/local/include'
+LIBX='-I/usr/local/lib'
+
+#  For IEEE, use the "-ffloat-store" option
+if test "x$IEEE" = x ; then
+#    FFLAGS='-Wimplicit -Wunused -Wuninitialized'
+    FFLAGS='-Wunused -Wuninitialized -fallow-argument-mismatch '
+    FOPTIM='-O3 -funroll-loops -ftree-vectorize -ffpe-trap=invalid'
+else
+#    FFLAGS='-Wimplicit -Wunused -ffloat-store'
+    FFLAGS='-Wunused -ffloat-store -std=legacy -fsecond-underscore -fallow-argument-mismatch'
+    FOPTIM='-O0'
+fi
