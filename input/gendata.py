@@ -16,12 +16,8 @@ logging.basicConfig(level=logging.DEBUG)
 
 _log = logging.getLogger(__name__)
 
-runname='Bute06'
+runname='Bute07'
 comments = 'Higher near-surface stratification; bigger domain to prevent seiching.  More horizontal diffusion; observed TS to 230 m; Qnet=500, uw=15 m/s, Non hydrostatic!!'
-
-
-
-# to change U we need to edit external_forcing recompile
 
 outdir0='../results/'+runname+'/'
 
@@ -318,5 +314,6 @@ os.system('git push origin main')
 os.system(f'git checkout -B {runname}')
 os.system(f'git push origin {runname}')
 os.system('git checkout main')
+
 
 exit()
