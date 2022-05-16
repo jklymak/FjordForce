@@ -16,8 +16,10 @@ logging.basicConfig(level=logging.DEBUG)
 
 _log = logging.getLogger(__name__)
 
-runname='Bute07'
-comments = 'Higher near-surface stratification; bigger domain to prevent seiching.  More horizontal diffusion; observed TS to 230 m; Qnet=500, uw=15 m/s, Non hydrostatic!!'
+runname='Bute08'
+comments = """Higher near-surface stratification; bigger domain to prevent 
+seiching.  More horizontal diffusion; observed TS to 230 m; Qnet=500, 
+uw=15 m/s, Non hydrostatic!!, KL10 off, fix spongewieght"""
 
 outdir0='../results/'+runname+'/'
 
@@ -247,7 +249,7 @@ with open(indir+"/SInit.bin", "wb") as f:
 # external wind stress
 nt = 17 * 24
 Cd = 1e-3
-uw = 13  # m/s
+uw = 15  # m/s
 taumax = Cd * uw**2  # N/m^2
 t = np.arange(nt*1.0)  # hours
 taut = 0 * t
@@ -283,16 +285,16 @@ with open(indir+'Qnet.bin', 'wb') as f:
 ###################################
 # RBCS sponge
 weight = np.zeros((nz, ny, nx))
-weight[:, -100:] = np.arange(0, 1, 100)**1.5
+weight[..., -100:] = np.linspace(0, 1, 100)**1.5
+print(weight)
 with open(indir+'spongeweight.bin', 'wb') as f:
     weight.tofile(f)
 
 # force to zero velocity to prevent reflections.
-
+# note that we also force T and S to Tinit and Sinit
 weight = np.zeros((nz, ny, nx))
 with open(indir+'Uforce.bin', 'wb') as f:
     weight.tofile(f)
-
 
 _log.info('All Done!')
 
