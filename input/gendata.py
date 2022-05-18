@@ -16,10 +16,11 @@ logging.basicConfig(level=logging.DEBUG)
 
 _log = logging.getLogger(__name__)
 
-runname='Bute09'
+runname='Bute10'
 comments = """Higher near-surface stratification; bigger domain to prevent 
 seiching.  More horizontal diffusion; observed TS to 230 m; Qnet=500, 
-uw=15 m/s, Non hydrostatic!!, KL10 off, fix spongewieght, larger Kh"""
+uw=15 m/s, Non hydrostatic!!, KL10 off, fix spongewieght, larger Kh, turn on
+diff for salt! and set advection scheme to default (2) """
 
 outdir0='../results/'+runname+'/'
 
