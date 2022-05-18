@@ -25,7 +25,7 @@
  gravity=9.81,
  implicitFreeSurface=.TRUE.,
  exactConserv=.FALSE.
- rigidLid=.TRUE.
+ rigidLid=.FALSE.
  nonHydrostatic=.TRUE.,
  hFacMin=0.1,
 # tempAdvScheme=77,
