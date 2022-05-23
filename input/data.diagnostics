@@ -10,8 +10,8 @@
                  'THETA   ',
                  'SALT    ',
                  'PHIHYD  ',
-                 'TRAC01',
-                 'TRAC02',
+                 'TRAC01  ',
+                 'TRAC02  ',
  filename(1)   = 'spinup'
 #
  filename(2)   = 'spinup2d'
