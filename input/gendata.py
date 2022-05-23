@@ -16,12 +16,12 @@ logging.basicConfig(level=logging.DEBUG)
 
 _log = logging.getLogger(__name__)
 
-runname='Bute11'
-comments = """Higher near-surface stratification; bigger domain to prevent 
-seiching.  More horizontal diffusion; observed TS to 230 m; Qnet=500, 
+runname='Bute12'
+comments = """Higher near-surface stratification; bigger domain to prevent
+seiching.  More horizontal diffusion; observed TS to 230 m; Qnet=500,
 uw=15 m/s, Non hydrostatic!!, KL10 off, fix spongewieght,  turn on
-diff for salt! and set advection scheme to default (2); implicit free surf versus 
-rigid lid; closer to convection example, Kh = 4e-3"""
+diff for salt! and set advection scheme to default (2); implicit free surf versus
+rigid lid; closer to convection example, Kh = 4e-3, O2 no airsea flux"""
 
 outdir0='../results/'+runname+'/'
 
@@ -297,6 +297,20 @@ with open(indir+'spongeweight.bin', 'wb') as f:
 weight = np.zeros((nz, ny, nx))
 with open(indir+'Uforce.bin', 'wb') as f:
     weight.tofile(f)
+
+#### Initial O2
+
+O2 = np.zeros((nz, ny, nx))
+O2z = np.interp(z, [0, 25, 120, 150, 1000], [7, 5, 2, 2.7, 2.7]) / 22.4 * 1e3  # umol/kg
+O2 = O2 + O2z[:, np.newaxis, np.newaxis]
+with open(indir+'O2.bin', 'wb') as f:
+    O2.tofile(f)
+
+fig, ax = plt.subplots()
+ax.plot(O2z, z)
+fig.savefig(outdir+'/figs/O2.png')
+
+
 
 _log.info('All Done!')
 

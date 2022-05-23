@@ -6,4 +6,5 @@
  useDIAGNOSTICS=.TRUE.,
  useMNC=.FALSE.,
  useRBCS=.TRUE.,
+ usePTRACERS=.TRUE.,
  /
