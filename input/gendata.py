@@ -121,6 +121,10 @@ try:
 except:
   pass
 try:
+  shutil.copy('data.ptracers', outdir+'/data.ptracers')
+except:
+  pass
+try:
   shutil.copy('data.rbcs', outdir+'/data.rbcs')
 except:
   pass
