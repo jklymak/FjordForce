@@ -292,7 +292,7 @@ with open(indir+'Qnet.bin', 'wb') as f:
 # RBCS sponge
 weight = np.zeros((nz, ny, nx))
 weight[..., -100:] = np.linspace(0, 1, 100)**1.5
-print(weight)
+# print(weight)
 with open(indir+'spongeweight.bin', 'wb') as f:
     weight.tofile(f)
 
@@ -315,7 +315,6 @@ with open(indir+'O2n.bin', 'wb') as f:
 fig, ax = plt.subplots()
 ax.plot(O2z, z)
 fig.savefig(outdir+'/figs/O2.png')
-
 
 
 _log.info('All Done!')
