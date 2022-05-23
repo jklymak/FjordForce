@@ -9,7 +9,7 @@
                  'WVEL    ',
                  'THETA   ',
                  'SALT    ',
-                 'O2      ',
+                 'TRAC01  ',
  filename(1)   = 'spinup'
 #
  filename(2)   = 'spinup2d'
