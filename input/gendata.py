@@ -305,6 +305,8 @@ O2z = np.interp(z, [0, 25, 120, 150, 1000], [7, 5, 2, 2.7, 2.7]) / 22.4 * 1e3  #
 O2 = O2 + O2z[:, np.newaxis, np.newaxis]
 with open(indir+'O2.bin', 'wb') as f:
     O2.tofile(f)
+with open(indir+'O2n.bin', 'wb') as f:
+    O2.tofile(f)
 
 fig, ax = plt.subplots()
 ax.plot(O2z, z)
