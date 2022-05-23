@@ -15,7 +15,7 @@
  PTRACERS_useKPP(1)=.TRUE. ,
  PTRACERS_initialFile(1)='../indata/O2.bin',
 # tracer 2 - O2 no air-sea gas exchange
- PTRACERS_names(2)='O2NoAirSea',
+ PTRACERS_names(2)='O2NOEX',
  PTRACERS_units(2)='umol/kg',
  PTRACERS_advScheme(2)=2,
  PTRACERS_diffKh(2)=4.E-3,
