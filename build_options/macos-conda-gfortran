@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 
-CPP='/usr/local/bin/cpp-10 -traditional -P'
+CPP='/usr/local/bin/cpp-11 -traditional -P'
 FC=mpif90
 CC=mpicc
 LINK=$FC
@@ -10,6 +10,7 @@ MAKEDEPEND='makedepend'
 DEFINES='-DWORDLENGTH=4 -DALWAYS_USE_MPI -DALLOW_USE_MPI'
 INCLUDES='-I/usr/local/include'
 LIBX='-I/usr/local/lib'
+#LIBS='-lSystem libquadmath.0.dylib'
 
 #  For IEEE, use the "-ffloat-store" option
 if test "x$IEEE" = x ; then
