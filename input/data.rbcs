@@ -38,3 +38,7 @@
 #   rbcsForcingPeriod=1860.,
 #   rbcsForcingCycle=44640.,
  /
+&RBCS_PARM02
+ useRBCptrnum(1)=.FALSE.,
+ useRBCptrnum(2)=.FALSE.,
+ /
