@@ -16,12 +16,12 @@ logging.basicConfig(level=logging.DEBUG)
 
 _log = logging.getLogger(__name__)
 
-runname='Bute12'
+runname='Bute13'
 comments = """Higher near-surface stratification; bigger domain to prevent
 seiching.  More horizontal diffusion; observed TS to 230 m; Qnet=500,
 uw=15 m/s, Non hydrostatic!!, KL10 off, fix spongewieght,  turn on
 diff for salt! and set advection scheme to default (2); implicit free surf versus
-rigid lid; closer to convection example, Kh = 4e-3, O2 no airsea flux"""
+rigid lid; closer to convection example, Kh = 4e-3, O2 with airsea flux"""
 
 outdir0='../results/'+runname+'/'
 

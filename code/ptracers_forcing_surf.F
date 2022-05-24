@@ -50,6 +50,13 @@ C  ks                   :: surface level index
       INTEGER iTrc, ks
       _RL add2EmP(1-OLx:sNx+OLx,1-OLy:sNy+OLy)
       _RL epsil, cutoff, tmpVar
+      _RL sox1, sox2, sox3, sox4
+      _RL ttemp, stemp, SchmidtNoO2
+      _RL aTT, aTK, aTS, aTS2, aTS3, aTS4, aTS5
+      _RL oA0, oA1, oA2, oA3, oA4, oA5
+      _RL oB0, oB1, oB2, oB3, oc0
+      _RL FluxO2, Kwexch, O2sat, oCnew, pisvel, windsq
+
 CEOP
 
       IF ( usingPCoords ) THEN
@@ -58,16 +65,66 @@ CEOP
         ks = 1
       ENDIF
 
+CAV new Wanninkhof numbers
+      sox1 = 1929.7 _d 0
+      sox2 = -117.46 _d 0
+      sox3 =    3.116 _d 0
+      sox4 =   -0.0306 _d 0
+      oA0=  2.00907 _d 0
+      oA1=  3.22014 _d 0
+      oA2=  4.05010 _d 0
+      oA3=  4.94457 _d 0
+      oA4= -2.56847 _d -1
+      oA5=  3.88767 _d 0
+      oB0= -6.24523 _d -3
+      oB1= -7.37614 _d -3
+      oB2= -1.03410 _d -2
+      oB3= -8.17083 _d -3
+      oC0= -4.88682 _d -7
+
 C Example of how to add forcing at the surface
       DO iTrc=1,PTRACERS_numInUse
-c       IF ( PTRACERS_StepFwd(iTrc) ) THEN
+        IF (iTRc.EQ.1) THEN
           DO j = jMin, jMax
            DO i = iMin, iMax
-             surfaceForcingPTr(i,j,bi,bj,iTrc) = 0. _d 0
-c    &                        + surfaceForcingS(i,j,bi,bj)
+             ttemp = theta(i,j,1,bi,bj)
+             stemp = salt(i,j,1,bi,bj)
+             SchmidtNoO2 =
+     &            sox1
+     &          + sox2 * ttemp
+     &          + sox3 * ttemp*ttemp
+     &          + sox4 * ttemp*ttemp*ttemp
+
+             aTT  = 298.15 _d 0 -ttemp
+             aTK  = 273.15 _d 0 +ttemp
+             aTS  = log(aTT/aTK)
+             aTS2 = aTS*aTS
+             aTS3 = aTS2*aTS
+             aTS4 = aTS3*aTS
+             aTS5 = aTS4*aTS
+
+             oCnew  = oA0 + oA1*aTS + oA2*aTS2 + oA3*aTS3 +
+     &            oA4*aTS4 + oA5*aTS5
+     &          + stemp*(oB0 + oB1*aTS + oB2*aTS2 + oB3*aTS3)
+     &          + oC0*(stemp*stemp)
+             O2sat = EXP(oCnew)
+
+c Convert from ml/l to umol/kg  (7 mL/L = 312 umol/kg)
+             O2sat = O2sat/22391.6 _d 0 * 1. _d 6
+C            the drag co-efficient that I am using is 1e-3
+             windsq = (ABS(taux0(i, j, bi, bj)) +
+     &                 ABS(tauy0(i, j, bi, bj))) / 1. _d -3
+             pisvel = 0.337 _d 0 * windsq / 3.6 _d 5
+             Kwexch = pisvel / sqrt(SchmidtNoO2 / 660.0 _d 0)
+C            Note no atmospheric pressure correction here...
+C            units: umol/kg m/s
+             FluxO2 = Kwexch * (O2sat - pTracer(i,j,1, bi, bj, iTrc))
+C            Units that gPtr wants are C/s, and when this gets used it is
+C            divided by 1/drF so the units of surfaceForcingPTr are C m/s.
+             surfaceForcingPTr(i,j,bi,bj,iTrc) = FluxO2
            ENDDO
           ENDDO
-c       ENDIF
+        ENDIF
       ENDDO
 
 C--   Option to convert Salt-relaxation into additional EmP contribution
