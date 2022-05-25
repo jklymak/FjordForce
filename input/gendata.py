@@ -207,8 +207,8 @@ fig.savefig(outdir+'/figs/dz.png')
 # temperature goes on the zc grid:
 df = pd.read_csv('TempSal.csv')
 T0 = 8 + np.ones(nz)
-zs = np.array([0, 5, 20, 50, 100, 200, 500])
-ts = np.array([7.4, 7.4, 7.4, 7.9, 8.0, 8.3, 8.06])
+zs = np.array([0, 5, 20, 50, 100, 200, 500, 600])
+ts = np.array([7.4, 7.4, 7.4, 7.9, 8.0, 8.3, 8.06, 8.06])
 T0 = np.interp(z, zs, ts)
 
 T0[z<220] = np.interp(z[z<220], df.Depth, df.Temperature)
@@ -233,7 +233,7 @@ f.close()
 # salinity profile...
 #
 # FRom
-s = np.array([15, 15, 29.1, 29.6, 30.1, 30.6, 30.66])
+s = np.array([15, 15, 29.1, 29.6, 30.1, 30.6, 30.66, 30.66])
 S0 =  30.6 - 15*np.exp(-z / 20)
 
 S0 = np.interp(z, zs, s)
