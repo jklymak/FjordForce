@@ -1,5 +1,5 @@
+# on narval `source ~/venvs/bute_venv_narval/bin/activate`
 import numpy as np
-
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
@@ -16,23 +16,20 @@ logging.basicConfig(level=logging.DEBUG)
 
 _log = logging.getLogger(__name__)
 
-runname='Bute13'
-comments = """Higher near-surface stratification; bigger domain to prevent
-seiching.  More horizontal diffusion; observed TS to 230 m; Qnet=500,
-uw=15 m/s, Non hydrostatic!!, KL10 off, fix spongewieght,  turn on
-diff for salt! and set advection scheme to default (2); implicit free surf versus
-rigid lid; closer to convection example, Kh = 4e-3, O2 with airsea flux"""
+runname='Bute14'
+comments = """Higher res, observed TS to 230 m; Qnet=500,
+uw=15 m/s, Non hydrostatic!!, KL10 off, Kh = 4e-4, O2 with airsea flux; """
 
 outdir0='../results/'+runname+'/'
 
 indir =outdir0+'/indata/'
 
-dx0=100.
+dx0=100. / 8.
 dy0=100.
 
 
 # model size
-nx = 8 * 160
+nx = 64 * 160
 ny = 1
 nz = 100
 
@@ -166,7 +163,7 @@ fig, ax = plt.subplots(2,1)
 ax[0].plot(x/1000.,dx)
 ax[1].plot(y/1000.,dy)
 #xlim([-50,50])
-fig.savefig(outdir+'/figs/dx.pdf')
+fig.savefig(outdir+'/figs/dx.png')
 
 ######## Bathy ############
 # get the topo:
@@ -195,11 +192,16 @@ dz = np.ones(nz)
 for i in range(1, nz):
     dz[i] = dz[i-1] * 1.0273
 
+
 with open(indir+"/delZ.bin", "wb") as f:
 	dz.tofile(f)
 f.close()
 z=np.cumsum(dz)
 print(z)
+fig, ax = plt.subplots()
+ax.plot(z, dz)
+fig.savefig(outdir+'/figs/dz.png')
+
 ####################
 # temperature profile...
 #
@@ -219,7 +221,7 @@ with open(indir+"/TRef.bin", "wb") as f:
 #plot
 plt.clf()
 plt.plot(T0,z)
-plt.savefig(outdir+'/figs/TO.pdf')
+plt.savefig(outdir+'/figs/TO.png')
 
 T0 = T0[:, np.newaxis] * (x[np.newaxis, :] * 0 + 1)
 with open(indir+"/TInit.bin", "wb") as f:
@@ -245,7 +247,7 @@ plt.clf()
 plt.plot(S0, z)
 
 plt.plot(s, zs, 'd' )
-plt.savefig(outdir+'/figs/SO.pdf')
+plt.savefig(outdir+'/figs/SO.png')
 
 S0 = S0[:, np.newaxis] * (x[np.newaxis, :] * 0 + 1)
 with open(indir+"/SInit.bin", "wb") as f:
@@ -262,9 +264,6 @@ taut = 0 * t
 taut[t<=24] = np.arange(25) / 24 * taumax
 taut[(t>24) & (t<(6*24))] = taumax
 taut[(t>=6*24) & (t<7*24)] = np.arange(23, -1, -1) / 24 * taumax
-fig, ax = plt.subplots()
-ax.plot(t, taut)
-fig.savefig(outdir+'/figs/Tau.pdf')
 
 taux = np.exp(-x/30000)
 taux = 0.5-np.tanh((x-60e3)/30e3)/2
@@ -274,7 +273,7 @@ tau = taut[np.newaxis, :] * taux[:, np.newaxis]
 print(np.shape(tau))
 fig, ax = plt.subplots()
 ax.pcolormesh(x, t,  tau.T, rasterized=True, vmin=-taumax, vmax=taumax, cmap='RdBu_r')
-fig.savefig(outdir+'/figs/Tau.pdf')
+fig.savefig(outdir+'/figs/Tau.png')
 
 with open(indir+'taux.bin', 'wb') as f:
     tau.T.tofile(f)
