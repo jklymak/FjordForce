@@ -189,8 +189,8 @@ fig.savefig(outdir+'/figs/topo.png')
 # dz:
 # dz is from the surface down (right?).  Its saved as positive.
 dz = np.ones(nz)
-for i in range(115, nz):
-    dz[i] = dz[i-1] * 1.0273
+for i in range(120, nz):
+    dz[i] = dz[i-1] * 1.03
 
 with open(indir+"/delZ.bin", "wb") as f:
 	dz.tofile(f)
