@@ -31,7 +31,7 @@ dy0=100.
 # model size
 nx = 64 * 160
 ny = 1
-nz = 100
+nz = 200
 
 _log.info('nx %d ny %d', nx, ny)
 
@@ -189,9 +189,8 @@ fig.savefig(outdir+'/figs/topo.png')
 # dz:
 # dz is from the surface down (right?).  Its saved as positive.
 dz = np.ones(nz)
-for i in range(1, nz):
+for i in range(100, nz):
     dz[i] = dz[i-1] * 1.0273
-
 
 with open(indir+"/delZ.bin", "wb") as f:
 	dz.tofile(f)
