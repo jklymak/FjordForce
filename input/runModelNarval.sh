@@ -4,7 +4,7 @@
 #SBATCH --mail-type=ALL
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=64
-#SBATCH --time=0-00:10
+#SBATCH --time=0-24:10
 #SBATCH --mem=0
 
 # sbatch --job-name={todo} runModelNarval.sh
