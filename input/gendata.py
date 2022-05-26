@@ -137,8 +137,8 @@ _log.info("Done copying files")
 ##### Dx ######
 
 dx = np.zeros(nx) + dx0
-for i in range(nx-120, nx):
-    dx[i] = dx[i-1] * 1.03
+for i in range(nx-200, nx):
+    dx[i] = dx[i-1] * 1.025
 
 
 # dx = zeros(nx)+100.
