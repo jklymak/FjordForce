@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 from shutil import copy
 from os import mkdir
 import shutil,os,glob
-import scipy.signal as scisig
+#import scipy.signal as scisig
 from maketopo import getTopo2D
 import logging
 import pandas as pd
@@ -16,20 +16,20 @@ logging.basicConfig(level=logging.DEBUG)
 
 _log = logging.getLogger(__name__)
 
-runname='Bute14'
-comments = """Higher res, observed TS to 230 m; Qnet=500,
+runname='Bute15'
+comments = """Higher res (dx=25, nz=200) observed TS to 230 m; Qnet=500,
 uw=15 m/s, Non hydrostatic!!, KL10 off, Kh = 4e-4, O2 with airsea flux; """
 
 outdir0='../results/'+runname+'/'
 
 indir =outdir0+'/indata/'
 
-dx0=100. / 8.
+dx0=100. / 4.
 dy0=100.
 
 
 # model size
-nx = 64 * 160
+nx = 48 * 104
 ny = 1
 nz = 200
 
@@ -94,9 +94,11 @@ mkdir(outdir+'/../build/')
 
 # copy any data that is in the local indata
 shutil.copytree('../indata/', outdir+'/../indata/')
-
-shutil.copy('../build/mitgcmuv', outdir+'/../build/mitgcmuv')
-shutil.copy('../build/Makefile', outdir+'/../build/Makefile')
+try:
+  shutil.copy('../build/mitgcmuv', outdir+'/../build/mitgcmuv')
+  shutil.copy('../build/Makefile', outdir+'/../build/Makefile')
+except:
+  pass
 shutil.copy('data', outdir+'/data')
 shutil.copy('eedata', outdir)
 shutil.copy('data.kl10', outdir)
@@ -135,7 +137,7 @@ _log.info("Done copying files")
 ##### Dx ######
 
 dx = np.zeros(nx) + dx0
-for i in range(nx-200, nx):
+for i in range(nx-100, nx):
     dx[i] = dx[i-1] * 1.03
 
 
