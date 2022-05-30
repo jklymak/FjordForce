@@ -16,9 +16,10 @@ logging.basicConfig(level=logging.DEBUG)
 
 _log = logging.getLogger(__name__)
 
-runname='Bute15'
+runname='Bute15NoWind'
 comments = """Higher res (dx=25, nz=200) observed TS to 230 m; Qnet=500,
-uw=15 m/s, Non hydrostatic!!, KL10 off, Kh = 4e-4, O2 with airsea flux; """
+uw=15 m/s, Non hydrostatic!!, KL10 off, Kh = 4e-4, O2 with airsea flux;
+No Wind"""
 
 outdir0='../results/'+runname+'/'
 
@@ -276,8 +277,6 @@ fig, ax = plt.subplots()
 ax.pcolormesh(x, t,  tau.T, rasterized=True, vmin=-taumax, vmax=taumax, cmap='RdBu_r')
 fig.savefig(outdir+'/figs/Tau.png')
 
-with open(indir+'taux.bin', 'wb') as f:
-    tau.T.tofile(f)
 
 ################################
 # external heat flux
@@ -287,6 +286,11 @@ Qt = taut / taumax * Qnetmax
 Q = Qt[np.newaxis, :] * taux[:, np.newaxis]
 with open(indir+'Qnet.bin', 'wb') as f:
     Q.T.tofile(f)
+
+# turn wind off
+tau = tau * 0
+with open(indir+'taux.bin', 'wb') as f:
+    tau.T.tofile(f)
 
 ###################################
 # RBCS sponge
