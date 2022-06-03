@@ -16,7 +16,7 @@ logging.basicConfig(level=logging.DEBUG)
 
 _log = logging.getLogger(__name__)
 
-runname='Bute16'
+runname='Bute18'
 comments = """Higher res (dx=25, nz=200) observed TS to 230 m; Qnet=0,
 uw=15 m/s, Non hydrostatic!!, KL10 off, Kh = 4e-4, O2 with airsea flux;
 No Heatflux, Wind twice as long"""
