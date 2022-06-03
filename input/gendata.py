@@ -1,4 +1,6 @@
 # on narval `source ~/venvs/bute_venv_narval/bin/activate`
+# cedar: source ~/venvs/butewind/bin/activate
+
 import numpy as np
 import matplotlib
 matplotlib.use('Agg')
@@ -16,10 +18,10 @@ logging.basicConfig(level=logging.DEBUG)
 
 _log = logging.getLogger(__name__)
 
-runname='Bute15NoHeat'
-comments = """Higher res (dx=25, nz=200) observed TS to 230 m; Qnet=500,
+runname='Bute16'
+comments = """Higher res (dx=25, nz=200) observed TS to 230 m; Qnet=0,
 uw=15 m/s, Non hydrostatic!!, KL10 off, Kh = 4e-4, O2 with airsea flux;
-No Heatflux"""
+No Heatflux, Wind twice as long"""
 
 outdir0='../results/'+runname+'/'
 
@@ -264,8 +266,8 @@ taumax = Cd * uw**2  # N/m^2
 t = np.arange(nt*1.0)  # hours
 taut = 0 * t
 taut[t<=24] = np.arange(25) / 24 * taumax
-taut[(t>24) & (t<(6*24))] = taumax
-taut[(t>=6*24) & (t<7*24)] = np.arange(23, -1, -1) / 24 * taumax
+taut[(t>24) & (t<(12*24))] = taumax
+taut[(t>=12*24) & (t<13*24)] = np.arange(23, -1, -1) / 24 * taumax
 
 taux = np.exp(-x/30000)
 taux = 0.5-np.tanh((x-60e3)/30e3)/2
