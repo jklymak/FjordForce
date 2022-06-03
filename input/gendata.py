@@ -16,10 +16,10 @@ logging.basicConfig(level=logging.DEBUG)
 
 _log = logging.getLogger(__name__)
 
-runname='Bute16'
+runname='Bute17'
 comments = """Higher res (dx=25, nz=200) observed TS to 230 m; Qnet=0,
 uw=15 m/s, Non hydrostatic!!, KL10 off, Kh = 4e-4, O2 with airsea flux;
-No Heatflux, Wind twice as"""
+No Heatflux, Wind half as long"""
 
 outdir0='../results/'+runname+'/'
 
@@ -262,7 +262,7 @@ Cd = 1e-3
 uw = 15  # m/s
 taumax = Cd * uw**2  # N/m^2
 t = np.arange(nt*1.0)  # hours
-duration = 10
+duration = 2.5
 taut = 0 * t
 taut[t<=24] = np.arange(25) / 24 * taumax
 taut[(t>24) & (t<((duration + 1)*24))] = taumax
