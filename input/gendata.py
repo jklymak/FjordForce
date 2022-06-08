@@ -16,23 +16,21 @@ logging.basicConfig(level=logging.DEBUG)
 
 _log = logging.getLogger(__name__)
 
-runname='Bute18'
-comments = """Higher res (dx=25, nz=200) observed TS to 230 m; Qnet=0,
-uw=15 m/s, Non hydrostatic!!, KL10 off, Kh = 4e-4, O2 with airsea flux;
-No Heatflux, Wind twice as long"""
+runname='Bute3d01'
+comments = """Thre d version of Bute15 with long wind forcing, no heat flux"""
 
 outdir0='../results/'+runname+'/'
 
 indir =outdir0+'/indata/'
 
-dx0=100. / 4.
-dy0=100.
+dx0=100.
+dy0=300.
 
 
 # model size
-nx = 48 * 104
-ny = 1
-nz = 200
+nx = 48 * 25
+ny = 10
+nz = 50
 
 _log.info('nx %d ny %d', nx, ny)
 
@@ -150,7 +148,7 @@ _log.info('XCoffset=%1.4f'%x[0])
 
 ##### Dy ######
 
-dy = np.array(dx0)
+dy = np.ones(ny) * dy0
 y=np.cumsum(dy)
 
 # save dx and dy
@@ -170,10 +168,14 @@ fig.savefig(outdir+'/figs/dx.png')
 
 ######## Bathy ############
 # get the topo:
-xd = np.array([0, 3, 23, 80, 83, 88, 91, 111, 140, 150, 10000])
-dd = np.array([0, 300, 500, 500, 400, 400, 500, 300, 300, 500, 500])
+xd = np.array([0, 3, 10000])
+dd = np.array([0, 200, 200])
 d = np.zeros((ny,nx))
-d[0, :] = np.interp(x, xd*1000, -dd)
+d0 = np.interp(x, xd*1000, -dd)
+d = d + d0
+# put a N/S wall...
+d[0, :] = 0
+
 with open(indir+"/topog.bin", "wb") as f:
   d.tofile(f)
 f.close()
@@ -191,9 +193,10 @@ fig.savefig(outdir+'/figs/topo.png')
 ##################
 # dz:
 # dz is from the surface down (right?).  Its saved as positive.
-dz = np.ones(nz)
-for i in range(115, nz):
-    dz[i] = dz[i-1] * 1.03
+dz = 200 / nz * np.ones(nz)
+
+# for i in range(115, nz):
+#    dz[i] = dz[i-1] * 1.03
 
 with open(indir+"/delZ.bin", "wb") as f:
 	dz.tofile(f)
@@ -215,7 +218,10 @@ ts = np.array([7.4, 7.4, 7.4, 7.9, 8.0, 8.3, 8.06, 8.06])
 T0 = np.interp(z, zs, ts)
 
 T0[z<220] = np.interp(z[z<220], df.Depth, df.Temperature)
-T0[z>=220] = T0[z<220][-1]
+try:
+  T0[z>=220] = T0[z<220][-1]
+except IndexError:
+  pass
 
 
 with open(indir+"/TRef.bin", "wb") as f:
@@ -225,7 +231,7 @@ plt.clf()
 plt.plot(T0,z)
 plt.savefig(outdir+'/figs/TO.png')
 
-T0 = T0[:, np.newaxis] * (x[np.newaxis, :] * 0 + 1)
+T0 = np.tile(T0, (1, ny, nz ))
 with open(indir+"/TInit.bin", "wb") as f:
 	T0.tofile(f)
 f.close()
@@ -242,7 +248,10 @@ S0 =  30.6 - 15*np.exp(-z / 20)
 S0 = np.interp(z, zs, s)
 
 S0[z<220] = np.interp(z[z<220], df.Depth, df.Salinity)
-S0[z>=220] = S0[z>=220] - S0[z>=220][0] + S0[z<220][-1]
+try:
+  S0[z>=220] = S0[z>=220] - S0[z>=220][0] + S0[z<220][-1]
+except IndexError:
+  pass
 with open(indir+"/SRef.bin", "wb") as f:
 	S0.tofile(f)
 plt.clf()
@@ -251,7 +260,7 @@ plt.plot(S0, z)
 plt.plot(s, zs, 'd' )
 plt.savefig(outdir+'/figs/SO.png')
 
-S0 = S0[:, np.newaxis] * (x[np.newaxis, :] * 0 + 1)
+S0 = np.tile(S0, (1, ny, nz ))
 with open(indir+"/SInit.bin", "wb") as f:
 	S0.tofile(f)
 
