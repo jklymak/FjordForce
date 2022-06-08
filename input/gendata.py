@@ -16,21 +16,20 @@ logging.basicConfig(level=logging.DEBUG)
 
 _log = logging.getLogger(__name__)
 
-runname='Bute3d01'
-comments = """Thre d version of Bute15 with long wind forcing, no heat flux"""
+runname='Bute3d02'
+comments = """Three-d version more dz, more dy, of Bute15 with long wind forcing, no heat flux"""
 
 outdir0='../results/'+runname+'/'
 
 indir =outdir0+'/indata/'
 
-dx0=50.
-dy0=300.
-
+dx0=30.
+dy0=75.
 
 # model size
-nx = 48 * 25
-ny = 10
-nz = 50
+nx = 48 * 40
+ny = 40
+nz = 100
 
 _log.info('nx %d ny %d', nx, ny)
 
@@ -304,7 +303,6 @@ Q = tau / taumax * Qnetmax
 Q = Q * 0
 with open(indir+'Qnet.bin', 'wb') as f:
     Q.T.tofile(f)
-
 
 ###################################
 # RBCS sponge
