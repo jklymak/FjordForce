@@ -231,7 +231,8 @@ plt.clf()
 plt.plot(T0,z)
 plt.savefig(outdir+'/figs/TO.png')
 
-T0 = np.tile(T0, (1, ny, nz ))
+T0 = np.broadcast_to(T0[:, np.newaxis, np.newaxis], (nz, ny, nx ))
+print(np.shape(T0))
 with open(indir+"/TInit.bin", "wb") as f:
 	T0.tofile(f)
 f.close()
@@ -260,7 +261,8 @@ plt.plot(S0, z)
 plt.plot(s, zs, 'd' )
 plt.savefig(outdir+'/figs/SO.png')
 
-S0 = np.tile(S0, (1, ny, nz ))
+S0 = np.broadcast_to(S0[:, np.newaxis, np.newaxis], (nz, ny, nx ))
+
 with open(indir+"/SInit.bin", "wb") as f:
 	S0.tofile(f)
 
