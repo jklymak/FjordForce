@@ -23,12 +23,12 @@ outdir0='../results/'+runname+'/'
 
 indir =outdir0+'/indata/'
 
-dx0=100.
+dx0=50.
 dy0=300.
 
 
 # model size
-nx = 48 * 20
+nx = 48 * 25
 ny = 10
 nz = 50
 
