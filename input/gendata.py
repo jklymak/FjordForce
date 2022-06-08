@@ -28,7 +28,7 @@ dy0=300.
 
 
 # model size
-nx = 48 * 25
+nx = 48 * 20
 ny = 10
 nz = 50
 
