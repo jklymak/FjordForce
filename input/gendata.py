@@ -282,11 +282,14 @@ taut[(t>=(duration + 1)*24) & (t<(duration + 2)*24)] = np.arange(23, -1, -1) / 2
 taux = np.exp(-x/30000)
 taux = 0.5-np.tanh((x-60e3)/30e3)/2
 
+taux = np.broadcast_to(taux[np.newaxis, :], (ny, nx))
+
 print(taux)
-tau = taut[np.newaxis, :] * taux[:, np.newaxis]
+tau = taut[np.newaxis, np.newaxis, :] * taux[:, :, np.newaxis]
+
 print(np.shape(tau))
 fig, ax = plt.subplots()
-ax.pcolormesh(x, t,  tau.T, rasterized=True, vmin=-taumax, vmax=taumax, cmap='RdBu_r')
+ax.pcolormesh(x, t,  tau[2, :, :].T, rasterized=True, vmin=-taumax, vmax=taumax, cmap='RdBu_r')
 fig.savefig(outdir+'/figs/Tau.png')
 
 with open(indir+'taux.bin', 'wb') as f:
@@ -295,9 +298,8 @@ with open(indir+'taux.bin', 'wb') as f:
 ################################
 # external heat flux
 Qnetmax = 500
-Qt = taut / taumax * Qnetmax
+Q = tau / taumax * Qnetmax
 
-Q = Qt[np.newaxis, :] * taux[:, np.newaxis]
 # turn heatfulx off
 Q = Q * 0
 with open(indir+'Qnet.bin', 'wb') as f:
