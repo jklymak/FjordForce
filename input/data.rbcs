@@ -11,10 +11,10 @@
 #- relaxation times
 # This is the timescale where "sponge=1".
 #------------------------------------------------------------------------------
-    tauRelaxU=43200.,
-    tauRelaxV=43200.,
-    tauRelaxT=43200.,
-    tauRelaxS=43200.,
+    tauRelaxU=4320.,
+    tauRelaxV=4320.,
+    tauRelaxT=4320.,
+    tauRelaxS=4320.,
 #------------------------------------------------------------------------------
 # masks - #1 and #2 = T,S , #3 = tracers ;
 # masks  U,V have explicit name - if left out then TMask = used
