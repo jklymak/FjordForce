@@ -4,7 +4,7 @@
 # switches
 #------------------------------------------------------------------------------
    useRBCtemp=.TRUE.,
-   useRBCvVel=.FALSE.,
+   useRBCvVel=.TRUE.,
    useRBCuVel=.TRUE.,
    useRBCsalt=.TRUE.,
 #------------------------------------------------------------------------------
@@ -30,6 +30,7 @@
 #------------------------------------------------------------------------------
    relaxTFile='../indata/TInit.bin',
    relaxUFile='../indata/Uforce.bin',
+   relaxVFile='../indata/Vforce.bin',
    relaxSFile='../indata/SInit.bin',
 #   relaxVFile='Vforce.bin',
 #------------------------------------------------------------------------------

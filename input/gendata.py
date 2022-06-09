@@ -318,6 +318,10 @@ weight = np.zeros((nz, ny, nx))
 with open(indir+'Uforce.bin', 'wb') as f:
     weight.tofile(f)
 
+weight = np.zeros((nz, ny, nx))
+with open(indir+'Vforce.bin', 'wb') as f:
+    weight.tofile(f)
+
 #### Initial O2
 
 O2 = np.zeros((nz, ny, nx))
