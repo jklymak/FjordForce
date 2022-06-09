@@ -28,6 +28,7 @@
  rigidLid=.FALSE.
  nonHydrostatic=.TRUE.,
  hFacMin=0.1,
+ bottomDragQuadratic=2.E-3,
 # tempAdvScheme=77,
 # implicSurfPress=0.5,
 # implicDiv2DFlow=0.5,

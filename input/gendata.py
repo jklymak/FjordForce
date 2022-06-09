@@ -17,13 +17,13 @@ logging.basicConfig(level=logging.DEBUG)
 _log = logging.getLogger(__name__)
 
 runname='Bute3d02'
-comments = """Three-d version more dz, more dy, of Bute15 with long wind forcing, no heat flux; 10x shorter rbc timescale"""
+comments = """Three-d version more dz, more dy, of Bute15 with long wind forcing, no heat flux; 10x shorter rbc timescale, actual bottom drag"""
 
 outdir0='../results/'+runname+'/'
 
 indir =outdir0+'/indata/'
 
-dx0=30.
+dx0=35.
 dy0=75.
 
 # model size
@@ -136,7 +136,7 @@ _log.info("Done copying files")
 
 dx = np.zeros(nx) + dx0
 for i in range(nx-200, nx):
-    dx[i] = dx[i-1] * 1.025
+    dx[i] = dx[i-1] * 1.035
 
 
 # dx = zeros(nx)+100.
