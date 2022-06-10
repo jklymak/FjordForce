@@ -5,6 +5,6 @@
  useKPP=.TRUE.,
  useDIAGNOSTICS=.TRUE.,
  useMNC=.FALSE.,
- useRBCS=.TRUE.,
+ useRBCS=.FALSE.,
  usePTRACERS=.TRUE.,
  /

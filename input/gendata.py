@@ -16,8 +16,8 @@ logging.basicConfig(level=logging.DEBUG)
 
 _log = logging.getLogger(__name__)
 
-runname='Bute3d02'
-comments = """Three-d version more dz, more dy, of Bute15 with long wind forcing, no heat flux; 10x shorter rbc timescale, actual bottom drag"""
+runname='Bute3d03'
+comments = """Three-d version more dz, more dy, of Bute15 with long wind forcing, no heat flux; no rbcs, actual bottom drag; turn off non hydrostatic"""
 
 outdir0='../results/'+runname+'/'
 
