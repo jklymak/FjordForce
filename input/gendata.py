@@ -16,8 +16,12 @@ logging.basicConfig(level=logging.DEBUG)
 
 _log = logging.getLogger(__name__)
 
-runname='Bute3d03'
-comments = """Three-d version more dz, more dy, of Bute15 with long wind forcing, no heat flux; no rbcs, actual bottom drag; turn off non hydrostatic"""
+runname='Bute3d04'
+comments = """
+Three-d version more dz, more dy, of Bute15 with long wind forcing,
+no heat flux; no rbcs, actual bottom drag; turn off non hydrostatic
+slope sides a bit
+"""
 
 outdir0='../results/'+runname+'/'
 
@@ -172,6 +176,11 @@ dd = np.array([0, 200, 200])
 d = np.zeros((ny,nx))
 d0 = np.interp(x, xd*1000, -dd)
 d = d + d0
+yd = np.array([0, 0.3, 3-0.3, 3])
+dd = np.array([0, 1, 1, 0])
+y0 = np.interp(y, yd*1000, dd)
+ym = np.broadcast_to(y0[:, np.newaxis], (ny, nx))
+d = d * ym
 # put a N/S wall...
 d[0, :] = 0
 
