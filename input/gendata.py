@@ -16,11 +16,11 @@ logging.basicConfig(level=logging.DEBUG)
 
 _log = logging.getLogger(__name__)
 
-runname='Bute3d04'
+runname='Bute3d05'
 comments = """
 Three-d version more dz, more dy, of Bute15 with long wind forcing,
 no heat flux; no rbcs, actual bottom drag; turn off non hydrostatic
-slope sides a bit
+slope sides a bit.  Wavy...
 """
 
 outdir0='../results/'+runname+'/'
@@ -176,11 +176,25 @@ dd = np.array([0, 200, 200])
 d = np.zeros((ny,nx))
 d0 = np.interp(x, xd*1000, -dd)
 d = d + d0
-yd = np.array([0, 0.3, 3-0.3, 3])
-dd = np.array([0, 1, 1, 0])
-y0 = np.interp(y, yd*1000, dd)
-ym = np.broadcast_to(y0[:, np.newaxis], (ny, nx))
-d = d * ym
+np.random.seed(20220610)
+nwave = 100000
+xwave = np.linspace(0, x[-1], nwave)
+
+wavybot = np.cumsum(np.random.randn(nwave))
+wavybot = np.interp(x, xwave, wavybot)
+wavybot -= np.min(wavybot[x<100e3])
+wavybot = wavybot / np.max(wavybot[x<100e3]) * 0.3
+
+wavytop = np.cumsum(np.random.randn(nwave))
+wavytop = np.interp(x, xwave, wavytop)
+wavytop -= np.min(wavytop[x<100e3])
+wavytop = wavytop / np.max(wavytop[x<100e3]) * 0.3
+for ind in range(nx):
+  yd = np.array([wavybot[ind], wavybot[ind]+0.5,
+                 3-0.5 - wavytop[ind], 3 - wavytop[ind]])
+  dd = np.array([0, 1, 1, 0])
+  y0 = np.interp(y, yd*1000, dd)
+  d[:, ind] = d[:, ind] * y0
 # put a N/S wall...
 d[0, :] = 0
 
@@ -195,6 +209,7 @@ _log.info('%s %s', np.shape(x), np.shape(d))
 print(y)
 ax[0].plot(x/1.e3,d[1,:].T)
 pcm=ax[1].pcolormesh(x/1.e3,y/1.e3,d,rasterized=True)
+ax[1].set_xlim([0, 200])
 fig.colorbar(pcm,ax=ax[1])
 fig.savefig(outdir+'/figs/topo.png')
 
