@@ -16,7 +16,7 @@ logging.basicConfig(level=logging.DEBUG)
 
 _log = logging.getLogger(__name__)
 
-runname='Bute3d05'
+runname='Bute3d06'
 comments = """
 Three-d version more dz, more dy, of Bute15 with long wind forcing,
 no heat flux; no rbcs, actual bottom drag; turn off non hydrostatic
@@ -31,8 +31,8 @@ dx0=35.
 dy0=75.
 
 # model size
-nx = 48 * 40
-ny = 40
+nx = 24 * 80
+ny = 2 * 40
 nz = 100
 
 _log.info('nx %d ny %d', nx, ny)
@@ -152,6 +152,8 @@ _log.info('XCoffset=%1.4f'%x[0])
 ##### Dy ######
 
 dy = np.ones(ny) * dy0
+for i in range(ny-40, ny):
+  dy[i] = dy[i-1] * 1.10
 y=np.cumsum(dy)
 
 # save dx and dy
@@ -190,11 +192,15 @@ wavytop = np.interp(x, xwave, wavytop)
 wavytop -= np.min(wavytop[x<100e3])
 wavytop = wavytop / np.max(wavytop[x<100e3]) * 0.3
 for ind in range(nx):
+  topshape = [3, 3, y[-1]/1000, y[-1] / 1000]
+  xtop = [0, 180e3, 220e3, 1000e3]
+  top = np.interp(x[ind], xtop, topshape)
   yd = np.array([wavybot[ind], wavybot[ind]+0.5,
-                 3-0.5 - wavytop[ind], 3 - wavytop[ind]])
+                 top-0.5 - wavytop[ind], top - wavytop[ind]])
   dd = np.array([0, 1, 1, 0])
   y0 = np.interp(y, yd*1000, dd)
   d[:, ind] = d[:, ind] * y0
+
 # put a N/S wall...
 d[0, :] = 0
 
@@ -210,8 +216,10 @@ print(y)
 ax[0].plot(x/1.e3,d[1,:].T)
 pcm=ax[1].pcolormesh(x/1.e3,y/1.e3,d,rasterized=True)
 ax[1].set_xlim([0, 200])
+ax[1].set_ylim([0, 4])
 fig.colorbar(pcm,ax=ax[1])
 fig.savefig(outdir+'/figs/topo.png')
+
 
 ##################
 # dz:

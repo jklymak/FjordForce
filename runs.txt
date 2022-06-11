@@ -1,0 +1,8 @@
+36063372                                           Bute3d02  jklymak  R 1-13:04:43      1 cdr2133
+   straight sides, nonhydrostatic, big gyre evolves...
+36097063                                           Bute3d03  jklymak  R 1-23:47:39      1 cdr2327
+   straight sides, hydrostatic, no rbcs
+36097038                                           Bute3d04  jklymak  R 1-23:43:45      1 cdr2224
+   sloped sides, hydrostatic, no rbcs
+36097939                                           Bute3d05  jklymak  R 2-00:10:00      1 cdr2278
+    sloped sides, wavey, hydrostatic, no rbcs.   Idea is to see lateral friction slow gyre.
