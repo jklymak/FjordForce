@@ -1,8 +1,25 @@
-36063372                                           Bute3d02  jklymak  R 1-13:04:43      1 cdr2133
+Cancelled 36063372                                           Bute3d02  jklymak  R 1-13:04:43      1 cdr2133
    straight sides, nonhydrostatic, big gyre evolves...
-36097063                                           Bute3d03  jklymak  R 1-23:47:39      1 cdr2327
+Done 36097063                                           Bute3d03  jklymak  R 1-23:47:39      1 cdr2327
    straight sides, hydrostatic, no rbcs
-36097038                                           Bute3d04  jklymak  R 1-23:43:45      1 cdr2224
+Done 36097038                                           Bute3d04  jklymak  R 1-23:43:45      1 cdr2224
    sloped sides, hydrostatic, no rbcs
-36097939                                           Bute3d05  jklymak  R 2-00:10:00      1 cdr2278
+Done 36097939                                           Bute3d05  jklymak  R 2-00:10:00      1 cdr2278
     sloped sides, wavey, hydrostatic, no rbcs.   Idea is to see lateral friction slow gyre.
+
+these all developed a strong gyre.  I think that is aphyscial, and the problem is that the
+receiving basin isn't that big.
+
+Running 36187770  Bute3d06  jklymak  R 2-00:09:24      1 cdr2294
+
+Has 40 more y grids just to have a big downstream basin.  Its about 40 km wide.  Physics in there isn't very good
+but should not be of interest.  The other alternative is sea surface nudging....
+
+The problem is aphysical behaviour with grid-scale noise, particularly in the receiving basin.  Is this poorly resolved baroclinic instability?
+Do I need variable viscosity to smooth things out in there?  Turn rbcs back on?
+
+36303483 Bute3d07
+   wavy sides, no rbcs, big downstream basin.   Leith viscosity on top of background.  Supposed to eat up gridscale noise, and may make soln in
+   big basin more reasonable, and hence not leak weird turbulence into the test basin.  Other possibilities include variable horizontal viscosity
+   so that it just damps the small scale response out there.
+

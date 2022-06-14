@@ -16,11 +16,12 @@ logging.basicConfig(level=logging.DEBUG)
 
 _log = logging.getLogger(__name__)
 
-runname='Bute3d06'
+runname='Bute3d08'
 comments = """
 Three-d version more dz, more dy, of Bute15 with long wind forcing,
 no heat flux; no rbcs, actual bottom drag; turn off non hydrostatic
-slope sides a bit.  Wavy...
+slope sides a bit.  Wavy...  Add Leith viscosity with default values.
+Shorter dt, and shorter duration wind (4d).
 """
 
 outdir0='../results/'+runname+'/'
@@ -304,7 +305,7 @@ Cd = 1e-3
 uw = 15  # m/s
 taumax = Cd * uw**2  # N/m^2
 t = np.arange(nt*1.0)  # hours
-duration = 10
+duration = 5
 taut = 0 * t
 taut[t<=24] = np.arange(25) / 24 * taumax
 taut[(t>24) & (t<((duration + 1)*24))] = taumax
@@ -319,8 +320,9 @@ print(taux)
 tau = taut[np.newaxis, np.newaxis, :] * taux[:, :, np.newaxis]
 
 print(np.shape(tau))
-fig, ax = plt.subplots()
-ax.pcolormesh(x, t,  tau[2, :, :].T, rasterized=True, vmin=-taumax, vmax=taumax, cmap='RdBu_r')
+fig, ax = plt.subplots(2, 1)
+ax[0].pcolormesh(x, t,  tau[2, :, :].T, rasterized=True, vmin=-taumax, vmax=taumax, cmap='RdBu_r')
+ax[1].pcolormesh(x, y,  tau[:, :, 48], rasterized=True, vmin=-taumax, vmax=taumax, cmap='RdBu_r')
 fig.savefig(outdir+'/figs/Tau.png')
 
 with open(indir+'taux.bin', 'wb') as f:
