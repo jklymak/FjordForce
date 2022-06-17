@@ -23,3 +23,11 @@ Do I need variable viscosity to smooth things out in there?  Turn rbcs back on?
    big basin more reasonable, and hence not leak weird turbulence into the test basin.  Other possibilities include variable horizontal viscosity
    so that it just damps the small scale response out there.
 
+   Went to NaN.  Plotting now
+
+36369789 Bute3d08
+   as above, but dt = 4s versus 6; hopefully stays stable.  Wind only blows for 4 days, not 10
+
+- I should probably switch to not telescoping so soon.
+- in 3D it definitely ventilates to deeper, if we believe the response in the big basin?
+

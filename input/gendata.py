@@ -16,25 +16,25 @@ logging.basicConfig(level=logging.DEBUG)
 
 _log = logging.getLogger(__name__)
 
-runname='Bute3d08'
+runname='Bute3d09'
 comments = """
 Three-d version more dz, more dy, of Bute15 with long wind forcing,
 no heat flux; no rbcs, actual bottom drag; turn off non hydrostatic
 slope sides a bit.  Wavy...  Add Leith viscosity with default values.
-Shorter dt, and shorter duration wind (4d).
+Shorter dt, and shorter duration wind (4d).  Even bigger receiving basin
 """
 
 outdir0='../results/'+runname+'/'
 
 indir =outdir0+'/indata/'
 
-dx0=35.
+dx0=50.
 dy0=75.
 
 # model size
-nx = 24 * 80
-ny = 2 * 40
-nz = 100
+nx = 32 * 60
+ny = 3 * 34
+nz = 80
 
 _log.info('nx %d ny %d', nx, ny)
 
@@ -154,7 +154,7 @@ _log.info('XCoffset=%1.4f'%x[0])
 
 dy = np.ones(ny) * dy0
 for i in range(ny-40, ny):
-  dy[i] = dy[i-1] * 1.10
+  dy[i] = dy[i-1] * 1.07
 y=np.cumsum(dy)
 
 # save dx and dy

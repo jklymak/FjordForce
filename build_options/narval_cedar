@@ -35,7 +35,7 @@ FFLAGS="$FFLAGS $MCMODEL -assume byterecl"
 #FFLAGS="$FFLAGS -r8"
 
 if test "x$IEEE" = x ; then     #- with optimisation:
-    FOPTIM='-O3'
+    FOPTIM='-O3 -fpe0'
 # does not work when -static does not work
 #    FOPTIM='-fast -align'
 # instead you can use
