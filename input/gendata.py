@@ -247,7 +247,9 @@ fig.savefig(outdir+'/figs/topo.png')
 ##################
 # dz:
 # dz is from the surface down (right?).  Its saved as positive.
-dz = 200 / nz * np.ones(nz)
+dz = np.ones(nz) * 2
+for ind in range(60, nz):
+  dz[ind] = dz[ind-1] * 1.05
 
 # for i in range(115, nz):
 #    dz[i] = dz[i-1] * 1.03
