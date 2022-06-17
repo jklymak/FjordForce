@@ -34,7 +34,7 @@ dy0=75.
 # model size
 nx = 32 * 60
 ny = 3 * 40
-nz = 85
+nz = 82
 
 _log.info('nx %d ny %d', nx, ny)
 
