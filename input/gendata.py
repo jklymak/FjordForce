@@ -248,9 +248,19 @@ fig.savefig(outdir+'/figs/topo.png')
 ##################
 # dz:
 # dz is from the surface down (right?).  Its saved as positive.
+
 dz = np.ones(nz) * 2.5
-for ind in range(48, nz):
-  dz[ind] = dz[ind-1] * 1.05
+maxz = 0
+a = 1.04
+z=np.cumsum(dz)
+
+while z[-1] < 200:
+  a = a + 0.01
+  for ind in range(48, nz):
+    dz[ind] = dz[ind-1] * a
+  z=np.cumsum(dz)
+
+
 
 # for i in range(115, nz):
 #    dz[i] = dz[i-1] * 1.03
@@ -258,7 +268,6 @@ for ind in range(48, nz):
 with open(indir+"/delZ.bin", "wb") as f:
 	dz.tofile(f)
 f.close()
-z=np.cumsum(dz)
 print(z)
 fig, ax = plt.subplots()
 ax.plot(z, dz)
