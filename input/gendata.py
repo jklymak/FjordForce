@@ -206,8 +206,6 @@ for xr in np.arange(0, x[-1], 100e3):
     wavytop[ind] -= np.min(wavytop[ind])
     wavytop[ind] = wavytop[ind] / np.max(wavytop[ind]) * 25.0
 
-
-
 for ind in range(nx):
   topshape = [3, 3, y[-1]/1000, y[-1] / 1000]
   xtop = [0, 180e3, 220e3, 10000e3]
@@ -217,6 +215,14 @@ for ind in range(nx):
   dd = np.array([0, 1, 1, 0])
   y0 = np.interp(y, yd*1000, dd)
   d[:, ind] = d[:, ind] * y0
+
+print(np.shape(x))
+indx = np.nonzero(x > 600e3)[0]
+print(np.shape(indx))
+d[:, indx] -= np.random.rand(ny, len(indx)) * 100
+
+# wall East side:
+d[:, -1] = 0
 
 # put a N/S wall...
 d[0, :] = 0
