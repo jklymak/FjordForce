@@ -221,9 +221,9 @@ indx = np.nonzero(x > 600e3)[0]
 print(np.shape(indx))
 d[:, indx] += np.random.rand(ny, len(indx)) * 100
 d[d>0] = 0
-# wall East side:
-d[:, -1] = 0
 
+# wall West side:
+d[:, 0] = 0
 # put a N/S wall...
 d[0, :] = 0
 
