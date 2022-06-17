@@ -153,7 +153,7 @@ _log.info('XCoffset=%1.4f'%x[0])
 ##### Dy ######
 
 dy = np.ones(ny) * dy0
-for i in range(ny-40, ny):
+for i in range(40, ny):
   dy[i] = dy[i-1] * 1.07
 y=np.cumsum(dy)
 
