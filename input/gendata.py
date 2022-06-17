@@ -197,7 +197,7 @@ for xr in np.arange(0, x[-1], 100e3):
     wavytop[ind] = wavytop[ind] / np.max(wavytop[ind]) * 0.3
   else:
     wavytop[ind] -= np.min(wavytop[ind])
-    wavytop[ind] = wavytop[ind] / np.max(wavytop[ind]) * 5.0
+    wavytop[ind] = wavytop[ind] / np.max(wavytop[ind]) * 25.0
 
 
 
