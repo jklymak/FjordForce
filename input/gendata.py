@@ -21,7 +21,8 @@ comments = """
 Three-d version more dz, more dy, of Bute15 with long wind forcing,
 no heat flux; no rbcs, actual bottom drag; turn off non hydrostatic
 slope sides a bit.  Wavy...  Add Leith viscosity with default values.
-Shorter dt, and shorter duration wind (4d).  Even bigger receiving basin
+Shorter dt, and shorter duration wind (4d).  Even bigger receiving
+basin with roughness in it.
 """
 
 outdir0='../results/'+runname+'/'
@@ -34,7 +35,7 @@ dy0=75.
 # model size
 nx = 32 * 60
 ny = 3 * 40
-nz = 64
+nz = 66
 
 _log.info('nx %d ny %d', nx, ny)
 
