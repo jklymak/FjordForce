@@ -193,11 +193,11 @@ wavytop = np.interp(x, xwave, wavytop)
 for xr in np.arange(0, x[-1], 100e3):
   ind = np.nonzero((x>=xr) & (x<xr+100e3))
   if xr == 0:
-    wavytop -= np.min(wavytop[ind])
-    wavytop = wavytop / np.max(wavytop[ind]) * 0.3
+    wavytop[ind] -= np.min(wavytop[ind])
+    wavytop[ind] = wavytop[ind] / np.max(wavytop[ind]) * 0.3
   else:
-    wavytop -= np.min(wavytop[ind])
-    wavytop = wavytop / np.max(wavytop[ind]) * 5.0
+    wavytop[ind] -= np.min(wavytop[ind])
+    wavytop[ind] = wavytop[ind] / np.max(wavytop[ind]) * 5.0
 
 
 
