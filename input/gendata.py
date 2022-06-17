@@ -219,8 +219,8 @@ for ind in range(nx):
 print(np.shape(x))
 indx = np.nonzero(x > 600e3)[0]
 print(np.shape(indx))
-d[:, indx] -= np.random.rand(ny, len(indx)) * 100
-
+d[:, indx] += np.random.rand(ny, len(indx)) * 100
+d[d>0] = 0
 # wall East side:
 d[:, -1] = 0
 
