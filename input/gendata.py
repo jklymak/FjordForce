@@ -185,14 +185,21 @@ xwave = np.linspace(0, x[-1], nwave)
 
 wavybot = np.cumsum(np.random.randn(nwave))
 wavybot = np.interp(x, xwave, wavybot)
-wavybot -= np.min(wavybot[x<100e3])
-wavybot = wavybot / np.max(wavybot[x<100e3]) * 0.3
+for xr in np.arange(0, x[-1], 100e3):
+  ind = np.nonzero((x>=xr) & (x<xr+100e3))
+  if xr <= 230:
+    wavybot[ind] -= np.min(wavybot[ind])
+    wavybot[ind] = wavybot[ind] / np.max(wavybot[ind]) * 0.3
+  else:
+    wavybot[ind] -= np.min(wavybot[ind])
+    wavybot[ind] = wavybot[ind] / np.max(wavybot[ind]) * 25.0
+
 
 wavytop = np.cumsum(np.random.randn(nwave))
 wavytop = np.interp(x, xwave, wavytop)
 for xr in np.arange(0, x[-1], 100e3):
   ind = np.nonzero((x>=xr) & (x<xr+100e3))
-  if xr == 0:
+  if xr <= 230:
     wavytop[ind] -= np.min(wavytop[ind])
     wavytop[ind] = wavytop[ind] / np.max(wavytop[ind]) * 0.3
   else:
