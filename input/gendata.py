@@ -259,6 +259,9 @@ while z[-1] < 200:
   for ind in range(48, nz):
     dz[ind] = dz[ind-1] * a
   z=np.cumsum(dz)
+dz[-1] -= z[-1] - 200
+z=np.cumsum(dz)
+
 
 # for i in range(115, nz):
 #    dz[i] = dz[i-1] * 1.03
