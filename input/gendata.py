@@ -187,7 +187,7 @@ wavybot = np.cumsum(np.random.randn(nwave))
 wavybot = np.interp(x, xwave, wavybot)
 for xr in np.arange(0, x[-1], 100e3):
   ind = np.nonzero((x>=xr) & (x<xr+100e3))
-  if xr <= 230e3:
+  if xr <= 430e3:
     wavybot[ind] -= np.min(wavybot[ind])
     wavybot[ind] = wavybot[ind] / np.max(wavybot[ind]) * 0.3
   else:
