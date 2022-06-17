@@ -190,11 +190,20 @@ wavybot = wavybot / np.max(wavybot[x<100e3]) * 0.3
 
 wavytop = np.cumsum(np.random.randn(nwave))
 wavytop = np.interp(x, xwave, wavytop)
-wavytop -= np.min(wavytop[x<100e3])
-wavytop = wavytop / np.max(wavytop[x<100e3]) * 0.3
+for xr in np.arange(0, x[-1], 100e3):
+  ind = np.nonzero((x>=xr) & (x<xr+100e3))
+  if xr == 0:
+    wavytop -= np.min(wavytop[ind])
+    wavytop = wavytop / np.max(wavytop[ind]) * 0.3
+  else:
+    wavytop -= np.min(wavytop[ind])
+    wavytop = wavytop / np.max(wavytop[ind]) * 5.0
+
+
+
 for ind in range(nx):
   topshape = [3, 3, y[-1]/1000, y[-1] / 1000]
-  xtop = [0, 180e3, 220e3, 1000e3]
+  xtop = [0, 180e3, 220e3, 10000e3]
   top = np.interp(x[ind], xtop, topshape)
   yd = np.array([wavybot[ind], wavybot[ind]+0.5,
                  top-0.5 - wavytop[ind], top - wavytop[ind]])
