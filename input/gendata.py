@@ -34,7 +34,7 @@ dy0=75.
 # model size
 nx = 32 * 60
 ny = 3 * 40
-nz = 82
+nz = 60
 
 _log.info('nx %d ny %d', nx, ny)
 
@@ -247,8 +247,8 @@ fig.savefig(outdir+'/figs/topo.png')
 ##################
 # dz:
 # dz is from the surface down (right?).  Its saved as positive.
-dz = np.ones(nz) * 2
-for ind in range(60, nz):
+dz = np.ones(nz) * 2.5
+for ind in range(48, nz):
   dz[ind] = dz[ind-1] * 1.05
 
 # for i in range(115, nz):
