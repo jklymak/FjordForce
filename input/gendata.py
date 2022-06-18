@@ -182,7 +182,7 @@ d0 = np.interp(x, xd*1000, -dd)
 d = d + d0
 np.random.seed(20220610)
 nwave = 100000
-xwave = np.linspace(0, x[-1], nwave)
+xwave = np.linspace(0, x[-1]+1000, nwave)
 
 wavybot = np.cumsum(np.random.randn(nwave))
 wavybot = np.interp(x, xwave, wavybot)
@@ -223,14 +223,15 @@ print(np.shape(indx))
 d[:, indx] += np.random.rand(ny, len(indx)) * 100
 d[d>0] = 0
 
+d[:, -1] = 200
 # wall West side:
 d[:, 0] = 0
 # put a N/S wall...
 d[0, :] = 0
 
 print(np.nonzero(~np.isfinite(d)))
+print(d[~np.isfinite(d)])
 
-dsaa
 with open(indir+"/topog.bin", "wb") as f:
   d.tofile(f)
 f.close()
