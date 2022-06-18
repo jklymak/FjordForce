@@ -228,6 +228,9 @@ d[:, 0] = 0
 # put a N/S wall...
 d[0, :] = 0
 
+print(np.nonzero(~np.isfinite(d)))
+
+dsaa
 with open(indir+"/topog.bin", "wb") as f:
   d.tofile(f)
 f.close()
