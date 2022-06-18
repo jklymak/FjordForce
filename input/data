@@ -4,7 +4,7 @@
 #
 # Continuous equation parameters
  &PARM01
- debuglevel=1,
+ debuglevel=3,
  tRefFile='../indata/TRef.bin',
  sRefFile='../indata/SRef.bin',
  viscAz=1.E-5,
@@ -95,5 +95,5 @@
  bathyFile='../indata/topog.bin',
  zonalWindFile='../indata/taux.bin',
  meridWindFile=,
- surfQnetFile=  '../indata/Qnet.bin',
+ # surfQnetFile=  '../indata/Qnet.bin',
  /

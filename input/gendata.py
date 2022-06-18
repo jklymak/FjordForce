@@ -260,6 +260,7 @@ while z[-1] < 200:
     dz[ind] = dz[ind-1] * a
   z=np.cumsum(dz)
 dz[-1] -= z[-1] - 200
+print(dz)
 z=np.cumsum(dz)
 
 # for i in range(115, nz):
@@ -292,6 +293,8 @@ except IndexError:
 
 with open(indir+"/TRef.bin", "wb") as f:
 	T0.tofile(f)
+print(T0)
+
 #plot
 plt.clf()
 plt.plot(T0,z)
@@ -321,6 +324,8 @@ except IndexError:
   pass
 with open(indir+"/SRef.bin", "wb") as f:
 	S0.tofile(f)
+print(S0)
+
 plt.clf()
 plt.plot(S0, z)
 
