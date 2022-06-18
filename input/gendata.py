@@ -12,7 +12,7 @@ from maketopo import getTopo2D
 import logging
 import pandas as pd
 
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.INFO)
 
 _log = logging.getLogger(__name__)
 
@@ -261,7 +261,6 @@ while z[-1] < 200:
   z=np.cumsum(dz)
 dz[-1] -= z[-1] - 200
 z=np.cumsum(dz)
-
 
 # for i in range(115, nz):
 #    dz[i] = dz[i-1] * 1.03
