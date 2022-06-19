@@ -348,7 +348,7 @@ Cd = 1e-3
 uw = 15  # m/s
 taumax = Cd * uw**2  # N/m^2
 t = np.arange(nt*1.0)  # hours
-duration = 3
+duration = 8
 taut = 0 * t
 taut[t<=24] = np.arange(25) / 24 * taumax
 taut[(t>24) & (t<((duration + 1)*24))] = taumax
