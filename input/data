@@ -94,6 +94,6 @@
 # pSurfInitFile='../indata/Eta.init',
  bathyFile='../indata/topog.bin',
 # meridWindFile=,
-# surfQnetFile=  '../indata/Qnet.bin',
+ surfQnetFile=  '../indata/Qnet.bin',
  zonalWindFile='../indata/taux.bin',
  /

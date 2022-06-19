@@ -16,10 +16,10 @@ logging.basicConfig(level=logging.INFO)
 
 _log = logging.getLogger(__name__)
 
-runname='Bute3d09'
+runname='Bute3d10'
 comments = """
 Three-d version more dz, more dy, of Bute15 with long wind forcing,
-no heat flux; no rbcs, actual bottom drag; turn off non hydrostatic
+Yes heat flux; no rbcs, actual bottom drag; turn off non hydrostatic
 slope sides a bit.  Wavy...  Add Leith viscosity with default values.
 Shorter dt, and shorter duration wind (4d).  Even bigger receiving
 basin with roughness in it.
@@ -376,8 +376,6 @@ with open(indir+'taux.bin', 'wb') as f:
 Qnetmax = 500
 Q = tau / taumax * Qnetmax
 
-# turn heatfulx off
-Q = Q * 0
 with open(indir+'Qnet.bin', 'wb') as f:
     Q.T.tofile(f)
 
