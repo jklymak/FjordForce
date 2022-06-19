@@ -31,3 +31,17 @@ Do I need variable viscosity to smooth things out in there?  Turn rbcs back on?
 - I should probably switch to not telescoping so soon.
 - in 3D it definitely ventilates to deeper, if we believe the response in the big basin?
 
+The mean flow problem is a bit strange because it sets up a definite sea-surface expression, and that then depends
+on the holding basin.  This is a surface wave, so its pretty hard to make the basin long enough to absorb.  The only
+way to really eliminate would be with SSH nudging.  We could make the receiving basin wider (in y) 40 km is still
+pretty small, but that starts getting computationally expensive for something that we dont' care about.
+
+Does receiving basin matter?  Maybe I'm wrong and should just be using rbcs?
+
+36783111 Bute3d09
+   - made receiving basin larger, slightly larger dz, 96 nodes.  Made receiving basin rougher as well.
+   Seems to do a good job of killing most KE in the basin.
+
+36851449  Bute3d10
+   - setp as above, but with negative heat flux.
+
