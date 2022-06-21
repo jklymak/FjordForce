@@ -38,10 +38,34 @@ pretty small, but that starts getting computationally expensive for something th
 
 Does receiving basin matter?  Maybe I'm wrong and should just be using rbcs?
 
+
 36783111 Bute3d09
+   - base case - 5 day burst, no heat forcing
    - made receiving basin larger, slightly larger dz, 96 nodes.  Made receiving basin rougher as well.
    Seems to do a good job of killing most KE in the basin.
+   36873905 New run
+   COMPLETED
 
 36851449  Bute3d10
+   - 5 day burst, yes heat forcing
    - setp as above, but with negative heat flux.
+   - wnet unstable.  Prob need smaller dt...
+   - new run 3s 36873
+   - new run 2s 36905241 = unstable 3.3125 d
+      - not clear what is wrong here - its hydrostatic so maybe that is a problem?  CFL seems fine...
+   - 36909734: tryig with NH.  left at dt=2s...
+      - CFL still fine, still dying at 3.3125 d.
+   - 36918939: back to 3s, nonHydrostatic=.FALSE. but starting ealier?   Prob should look at a snap
 
+
+
+
+36851987 Bute3d11
+   - no heat flux 8-d burst
+   - unstable around 289800 = 13.4 days...
+   - 3s 36908786  unstable same time.  Must be wave hitting edge
+   - 2s 36911431
+
+36851935 Bute3d12
+   - no heat flux 3-d burst
+   - Still running, almost done
