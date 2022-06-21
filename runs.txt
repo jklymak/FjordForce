@@ -69,3 +69,11 @@ Does receiving basin matter?  Maybe I'm wrong and should just be using rbcs?
 36851935 Bute3d12
    - no heat flux 3-d burst
    - Still running, almost done
+
+37000785 Bute3d13
+   - 0.1 N/m^2, 5-d burst (versus 0.225 N/m^2)
+
+37000960 Bute3d14
+   - 0.025 N/m^2, 5-d burst (versus 0.225 N/m^2)
+
+

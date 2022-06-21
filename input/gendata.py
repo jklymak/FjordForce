@@ -16,13 +16,17 @@ logging.basicConfig(level=logging.INFO)
 
 _log = logging.getLogger(__name__)
 
+duration = 5
+wind = 20  # m/s
+uw = wind
+
 runname='Bute3d14'
-comments = """
+comments = f"""
 Three-d version more dz, more dy, of Bute15 with long wind forcing,
 No heat flux; no rbcs, actual bottom drag; turn off non hydrostatic
 slope sides a bit.  Wavy...  Add Leith viscosity with default values.
 Shorter 5d wind.  Even bigger receiving
-basin with roughness in it.  Tau=0.025 N/m^2 (5m/s) versus 0.225 N/m^2
+basin with roughness in it.  Tau={wind**2*1e-3} N/m^2 ({wind} m/s) versus 0.225 N/m^2
 """
 
 outdir0='../results/'+runname+'/'
@@ -345,10 +349,8 @@ with open(indir+"/SInit.bin", "wb") as f:
 # external wind stress
 nt = 17 * 24
 Cd = 1e-3
-uw = 10  # m/s
 taumax = Cd * uw**2  # N/m^2
 t = np.arange(nt*1.0)  # hours
-duration = 5
 taut = 0 * t
 taut[t<=24] = np.arange(25) / 24 * taumax
 taut[(t>24) & (t<((duration + 1)*24))] = taumax
