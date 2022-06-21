@@ -20,7 +20,7 @@ duration = 5
 wind = 20  # m/s
 uw = wind
 
-runname='Bute3d14'
+runname='Bute3d15'
 comments = f"""
 Three-d version more dz, more dy, of Bute15 with long wind forcing,
 No heat flux; no rbcs, actual bottom drag; turn off non hydrostatic
