@@ -16,13 +16,13 @@ logging.basicConfig(level=logging.INFO)
 
 _log = logging.getLogger(__name__)
 
-runname='Bute3d13'
+runname='Bute3d14'
 comments = """
 Three-d version more dz, more dy, of Bute15 with long wind forcing,
 No heat flux; no rbcs, actual bottom drag; turn off non hydrostatic
 slope sides a bit.  Wavy...  Add Leith viscosity with default values.
 Shorter 5d wind.  Even bigger receiving
-basin with roughness in it.  Tau=0.1 N/m^2 versus 0.2 N/m^2
+basin with roughness in it.  Tau=0.025 N/m^2 (5m/s) versus 0.225 N/m^2
 """
 
 outdir0='../results/'+runname+'/'
