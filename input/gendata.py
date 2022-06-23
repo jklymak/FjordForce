@@ -11,22 +11,26 @@ import shutil,os,glob
 from maketopo import getTopo2D
 import logging
 import pandas as pd
+from replace_data import replace_data
 
 logging.basicConfig(level=logging.INFO)
 
 _log = logging.getLogger(__name__)
 
 duration = 5
-wind = 12.5  # m/s
+wind = 15  # m/s
 uw = wind
+lat = 60
+f0 = 1e-4 * np.sin(lat * np.pi / 180) / np.sin(45 * np.pi / 180)
 
-runname='Bute3d16'
+runname='Bute3d17'
 comments = f"""
 Three-d version more dz, more dy, of Bute15 with long wind forcing,
 No heat flux; no rbcs, actual bottom drag; turn off non hydrostatic
 slope sides a bit.  Wavy...  Add Leith viscosity with default values.
 Shorter 5d wind.  Even bigger receiving
-basin with roughness in it.  Tau={wind**2*1e-3} N/m^2 ({wind} m/s) versus 0.225 N/m^2
+basin with roughness in it.  Tau={wind**2*1e-3} N/m^2 ({wind} m/s) versus 0.225 N/m^2.
+Lat = {lat}; f={f0}
 """
 
 outdir0='../results/'+runname+'/'
@@ -107,6 +111,8 @@ try:
   shutil.copy('../build/Makefile', outdir+'/../build/Makefile')
 except:
   pass
+replace_data('data', 'f0', f'{f0:1.3e}')
+
 shutil.copy('data', outdir+'/data')
 shutil.copy('eedata', outdir)
 shutil.copy('data.kl10', outdir)
