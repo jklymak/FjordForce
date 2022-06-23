@@ -20,7 +20,7 @@ _log = logging.getLogger(__name__)
 duration = 5
 wind = 15  # m/s
 uw = wind
-lat = 60
+lat = 30
 f0 = 1e-4 * np.sin(lat * np.pi / 180) / np.sin(45 * np.pi / 180)
 
 runname='Bute3d17'
