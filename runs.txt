@@ -90,6 +90,10 @@ Does receiving basin matter?  Maybe I'm wrong and should just be using rbcs?
 37193100 Bute3d18
    - 0.225 N/m^2 (12.5 m/s), but f=1.2e-4 lat = 60
 
+37195592 Buete3d19
+   Constant Nsq = 3.44 e-4.  Temperature advection is on, but it is passive (tAlpha=0)
+   I should check this one before running any more stratifications.
+
 
 
 
