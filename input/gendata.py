@@ -20,10 +20,10 @@ _log = logging.getLogger(__name__)
 duration = 5
 wind = 15  # m/s
 uw = wind
-lat = 30
+lat = 60
 f0 = 1e-4 * np.sin(lat * np.pi / 180) / np.sin(45 * np.pi / 180)
 
-runname='Bute3d17'
+runname='Bute3d18'
 comments = f"""
 Three-d version more dz, more dy, of Bute15 with long wind forcing,
 No heat flux; no rbcs, actual bottom drag; turn off non hydrostatic
