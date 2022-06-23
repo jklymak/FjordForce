@@ -17,10 +17,10 @@ logging.basicConfig(level=logging.INFO)
 _log = logging.getLogger(__name__)
 
 duration = 5
-wind = 20  # m/s
+wind = 12.5  # m/s
 uw = wind
 
-runname='Bute3d15'
+runname='Bute3d16'
 comments = f"""
 Three-d version more dz, more dy, of Bute15 with long wind forcing,
 No heat flux; no rbcs, actual bottom drag; turn off non hydrostatic
