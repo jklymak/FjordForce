@@ -20,13 +20,13 @@ _log = logging.getLogger(__name__)
 duration = 5
 wind = 15  # m/s
 uw = wind
-lat = 45
+lat = 0
 f0 = 1e-4 * np.sin(lat * np.pi / 180) / np.sin(45 * np.pi / 180)
 Nsq0 = 3.44e-4
-tAlpha = 0
+tAlpha = 2.0e-4
 sBeta = 7.4e-4
 
-runname='Bute3d19'
+runname='Bute3d20'
 comments = f"""
 Three-d version more dz, more dy, of Bute15 with long wind forcing,
 No heat flux; no rbcs, actual bottom drag; turn off non hydrostatic
@@ -34,7 +34,7 @@ slope sides a bit.  Wavy...  Add Leith viscosity with default values.
 Shorter 5d wind.  Even bigger receiving
 basin with roughness in it.  Tau={wind**2*1e-3} N/m^2 ({wind} m/s) versus 0.225 N/m^2.
 Lat = {lat}; f={f0}
-Constant Nsq={Nsq0}!
+*Not* constant Nsq={Nsq0}....
 """
 
 outdir0='../results/'+runname+'/'
