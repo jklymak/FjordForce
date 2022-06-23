@@ -20,10 +20,13 @@ _log = logging.getLogger(__name__)
 duration = 5
 wind = 15  # m/s
 uw = wind
-lat = 60
+lat = 45
 f0 = 1e-4 * np.sin(lat * np.pi / 180) / np.sin(45 * np.pi / 180)
+Nsq0 = 3.44e-4
+tAlpha = 0
+sBeta = 7.4e-4
 
-runname='Bute3d18'
+runname='Bute3d19'
 comments = f"""
 Three-d version more dz, more dy, of Bute15 with long wind forcing,
 No heat flux; no rbcs, actual bottom drag; turn off non hydrostatic
@@ -31,6 +34,7 @@ slope sides a bit.  Wavy...  Add Leith viscosity with default values.
 Shorter 5d wind.  Even bigger receiving
 basin with roughness in it.  Tau={wind**2*1e-3} N/m^2 ({wind} m/s) versus 0.225 N/m^2.
 Lat = {lat}; f={f0}
+Constant Nsq={Nsq0}!
 """
 
 outdir0='../results/'+runname+'/'
@@ -112,6 +116,8 @@ try:
 except:
   pass
 replace_data('data', 'f0', f'{f0:1.3e}')
+replace_data('data', 'tAlpha', f'{tAlpha:1.3e}')
+replace_data('data', 'sBlpha', f'{sBeta:1.3e}')
 
 shutil.copy('data', outdir+'/data')
 shutil.copy('eedata', outdir)
@@ -326,16 +332,21 @@ f.close()
 # salinity profile...
 #
 # FRom
-s = np.array([15, 15, 29.1, 29.6, 30.1, 30.6, 30.66, 30.66])
-S0 =  30.6 - 15*np.exp(-z / 20)
+if tAlpha > 0:
+  s = np.array([15, 15, 29.1, 29.6, 30.1, 30.6, 30.66, 30.66])
+  S0 =  30.6 - 15*np.exp(-z / 20)
 
-S0 = np.interp(z, zs, s)
+  S0 = np.interp(z, zs, s)
 
-S0[z<220] = np.interp(z[z<220], df.Depth, df.Salinity)
-try:
-  S0[z>=220] = S0[z>=220] - S0[z>=220][0] + S0[z<220][-1]
-except IndexError:
-  pass
+  S0[z<220] = np.interp(z[z<220], df.Depth, df.Salinity)
+  try:
+    S0[z>=220] = S0[z>=220] - S0[z>=220][0] + S0[z<220][-1]
+  except IndexError:
+    pass
+else:
+  # constant Nsq case
+  S0 = 20 + z * Nsq0 / sBeta / 9.81
+
 with open(indir+"/SRef.bin", "wb") as f:
 	S0.tofile(f)
 print(S0)
@@ -343,7 +354,10 @@ print(S0)
 plt.clf()
 plt.plot(S0, z)
 
-plt.plot(s, zs, 'd' )
+try:
+  plt.plot(s, zs, 'd' )
+except:
+  pass
 plt.savefig(outdir+'/figs/SO.png')
 
 S0 = np.broadcast_to(S0[:, np.newaxis, np.newaxis], (nz, ny, nx ))
