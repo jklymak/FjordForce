@@ -25,9 +25,9 @@ f0 = 1e-4 * np.sin(lat * np.pi / 180) / np.sin(45 * np.pi / 180)
 Nsq0 = 3.44e-4
 tAlpha = 2.0e-4
 sBeta = 7.4e-4
-Nsqfac = 2.0
+Nsqfac = 0.5
 
-runname='Bute3d21'
+runname='Bute3d22'
 comments = f"""
 Three-d version more dz, more dy, of Bute15 with long wind forcing,
 No heat flux; no rbcs, actual bottom drag; turn off non hydrostatic
