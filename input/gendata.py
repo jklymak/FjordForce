@@ -25,8 +25,9 @@ f0 = 1e-4 * np.sin(lat * np.pi / 180) / np.sin(45 * np.pi / 180)
 Nsq0 = 3.44e-4
 tAlpha = 2.0e-4
 sBeta = 7.4e-4
+Nsqfac = 2.0
 
-runname='Bute3d20'
+runname='Bute3d21'
 comments = f"""
 Three-d version more dz, more dy, of Bute15 with long wind forcing,
 No heat flux; no rbcs, actual bottom drag; turn off non hydrostatic
@@ -34,7 +35,7 @@ slope sides a bit.  Wavy...  Add Leith viscosity with default values.
 Shorter 5d wind.  Even bigger receiving
 basin with roughness in it.  Tau={wind**2*1e-3} N/m^2 ({wind} m/s) versus 0.225 N/m^2.
 Lat = {lat}; f={f0}
-*Not* constant Nsq={Nsq0}....
+*Not* constant Nsqfactor={Nsqfac}....
 """
 
 outdir0='../results/'+runname+'/'
@@ -310,6 +311,8 @@ try:
 except IndexError:
   pass
 
+# make the gradient larger by the required amount to get the Nsq fac
+T0 = T0[0] + (T0 - T0[0]) * Nsqfac
 
 with open(indir+"/TRef.bin", "wb") as f:
 	T0.tofile(f)
@@ -346,6 +349,9 @@ if tAlpha > 0:
 else:
   # constant Nsq case
   S0 = 20 + z * Nsq0 / sBeta / 9.81
+
+# make gradient larger if Nsqfac....
+S0 = S0[0] + (S0 - S0[0]) * Nsqfac
 
 with open(indir+"/SRef.bin", "wb") as f:
 	S0.tofile(f)
