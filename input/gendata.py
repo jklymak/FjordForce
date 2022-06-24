@@ -25,7 +25,7 @@ f0 = 1e-4 * np.sin(lat * np.pi / 180) / np.sin(45 * np.pi / 180)
 Nsq0 = 3.44e-4
 tAlpha = 2.0e-4
 sBeta = 7.4e-4
-Nsqfac = 0.5
+Nsqfac = 2.0
 
 runname='Bute3d22'
 comments = f"""
