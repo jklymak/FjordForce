@@ -98,8 +98,11 @@ Does receiving basin matter?  Maybe I'm wrong and should just be using rbcs?
 37203346 Buete3d20
    Back to variable Nsq (I hope).  f=0.
 
+ Bute3d21
+   - Nsq=0.5 of base Nsq
 
-
+ Bute3d22
+   - Nsq=2.0 of base Nsq
 
 
 
