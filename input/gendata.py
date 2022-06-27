@@ -17,17 +17,19 @@ logging.basicConfig(level=logging.INFO)
 
 _log = logging.getLogger(__name__)
 
-duration = 5
-wind = 15  # m/s
+duration = 17
+initial = 0
+wind = 10  # m/s
 uw = wind
 lat = 45
 f0 = 1e-4 * np.sin(lat * np.pi / 180) / np.sin(45 * np.pi / 180)
 Nsq0 = 3.44e-4
-tAlpha = 2.0e-4
+tAlpha = 0.0e-4
 sBeta = 7.4e-4
-Nsqfac = 0.5
+Nsqfac = 1.0
+Nsq0 = Nsq0 * Nsqfac
 
-runname='Bute3d21'
+runname='Bute3d22'
 comments = f"""
 Three-d version more dz, more dy, of Bute15 with long wind forcing,
 No heat flux; no rbcs, actual bottom drag; turn off non hydrostatic
@@ -35,7 +37,8 @@ slope sides a bit.  Wavy...  Add Leith viscosity with default values.
 Shorter 5d wind.  Even bigger receiving
 basin with roughness in it.  Tau={wind**2*1e-3} N/m^2 ({wind} m/s) versus 0.225 N/m^2.
 Lat = {lat}; f={f0}
-*Not* constant Nsqfactor={Nsqfac}....
+Constant Nsq0={Nsq0}.
+No wind startup = just turn it on.
 """
 
 outdir0='../results/'+runname+'/'
@@ -378,9 +381,13 @@ Cd = 1e-3
 taumax = Cd * uw**2  # N/m^2
 t = np.arange(nt*1.0)  # hours
 taut = 0 * t
-taut[t<=24] = np.arange(25) / 24 * taumax
-taut[(t>24) & (t<((duration + 1)*24))] = taumax
-taut[(t>=(duration + 1)*24) & (t<(duration + 2)*24)] = np.arange(23, -1, -1) / 24 * taumax
+
+if initial == 1:
+  taut[t<=24] = np.arange(25) / 24 * taumax
+  taut[(t>24) & (t<((duration + 1)*24))] = taumax
+  taut[(t>=(duration + 1)*24) & (t<(duration + 2)*24)] = np.arange(23, -1, -1) / 24 * taumax
+else:
+  taut = taut * 0 + taumax
 
 taux = np.exp(-x/30000)
 taux = 0.5-np.tanh((x-60e3)/30e3)/2
