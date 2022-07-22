@@ -29,7 +29,7 @@ sBeta = 7.4e-4
 Nsqfac = 1.0
 Nsq0 = Nsq0 * Nsqfac
 
-runname='Bute3d23'
+runname='Bute3d27'
 comments = f"""
 Three-d version more dz, more dy, of Bute15 with long wind forcing,
 No heat flux; no rbcs, actual bottom drag; turn off non hydrostatic
@@ -39,6 +39,7 @@ basin with roughness in it.  Tau={wind**2*1e-3} N/m^2 ({wind} m/s) versus 0.225 
 Lat = {lat}; f={f0}
 Constant Nsq0={Nsq0}.
 No wind startup = just turn it on.
+Redo of Bute3d23, but with daily momentum diagnostics...
 """
 
 outdir0='../results/'+runname+'/'
