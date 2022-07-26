@@ -22,8 +22,8 @@
  filename(3)   = 'Momentum'
  frequency(3)  = 86400,
  timePhase(3)  = 0,
- fields(1:8,3) = 'Um_Diss ',
-                 'Vm_Diss ',
+ fields(1:8,3) = 'Um_ImplD',
+                 'Vm_ImplD',
                  'Um_Advec',
                  'Vm_Advec',
                  'Um_Cori ',

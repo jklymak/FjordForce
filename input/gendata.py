@@ -400,8 +400,9 @@ tau = taut[np.newaxis, np.newaxis, :] * taux[:, :, np.newaxis]
 
 print(np.shape(tau))
 fig, ax = plt.subplots(2, 1)
-ax[0].pcolormesh(x, t,  tau[2, :, :].T, rasterized=True, vmin=-taumax, vmax=taumax, cmap='RdBu_r')
+pc = ax[0].pcolormesh(x, t,  tau[2, :, :].T, rasterized=True, vmin=-taumax, vmax=taumax, cmap='RdBu_r')
 ax[1].pcolormesh(x, y,  tau[:, :, 48], rasterized=True, vmin=-taumax, vmax=taumax, cmap='RdBu_r')
+fig.colorbar(pc, ax=ax)
 fig.savefig(outdir+'/figs/Tau.png')
 
 with open(indir+'taux.bin', 'wb') as f:
