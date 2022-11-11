@@ -118,8 +118,10 @@ Does receiving basin matter?  Maybe I'm wrong and should just be using rbcs?
 40054007 Bute3d27
    - same as Bute3d23, but with momentum diagnostics.
 
-
-
+50046951 Bute3d28
+   - same as Bute3d27, but with f=0.  Time series shows that changing f doesn't
+   change the timing, but 3-d runs are very different (I assume).
+   Issue with this rn is that it _still_ has some N/S assymetry
 
 
 

@@ -21,7 +21,7 @@ duration = 17
 initial = 0
 wind = 10  # m/s
 uw = wind
-lat = 0
+lat = 45
 f0 = 1e-4 * np.sin(lat * np.pi / 180) / np.sin(45 * np.pi / 180)
 Nsq0 = 3.44e-4
 tAlpha = 0.0e-4
@@ -29,17 +29,13 @@ sBeta = 7.4e-4
 Nsqfac = 1.0
 Nsq0 = Nsq0 * Nsqfac
 
-runname='Bute3d28'
+runname='Bute3d30'
 comments = f"""
-Three-d version more dz, more dy, of Bute15 with long wind forcing,
-No heat flux; no rbcs, actual bottom drag; turn off non hydrostatic
-slope sides a bit.  Wavy...  Add Leith viscosity with default values.
-Shorter 5d wind.  Even bigger receiving
+Symmetric, bigger receiving
 basin with roughness in it.  Tau={wind**2*1e-3} N/m^2 ({wind} m/s) versus 0.225 N/m^2.
 Lat = {lat}; f={f0}
 Constant Nsq0={Nsq0}.
 No wind startup = just turn it on.
-Bute3d23 but with f=0 for the no rotation to see the differences...
 """
 
 outdir0='../results/'+runname+'/'
@@ -175,9 +171,12 @@ _log.info('XCoffset=%1.4f'%x[0])
 ##### Dy ######
 
 dy = np.ones(ny) * dy0
-for i in range(40, ny):
+for i in range(int(ny/2) + 20, ny):
   dy[i] = dy[i-1] * 1.07
+for i in range(int(ny/2) - 20, 0, -1):
+  dy[i] = dy[i+1] * 1.07
 y=np.cumsum(dy)
+y = y - y[int(ny/2)]
 
 # save dx and dy
 with open(indir+"/delX.bin", "wb") as f:
@@ -201,20 +200,22 @@ dd = np.array([0, 200, 200])
 d = np.zeros((ny,nx))
 d0 = np.interp(x, xd*1000, -dd)
 d = d + d0
+
+
+
 np.random.seed(20220610)
 nwave = 100000
 xwave = np.linspace(0, x[-1]+1000, nwave)
-
 wavybot = np.cumsum(np.random.randn(nwave))
 wavybot = np.interp(x, xwave, wavybot)
 for xr in np.arange(0, x[-1], 100e3):
   ind = np.nonzero((x>=xr) & (x<xr+100e3))
-  if xr <= 430e3:
+  if xr <= 230e3:
     wavybot[ind] -= np.min(wavybot[ind])
     wavybot[ind] = wavybot[ind] / np.max(wavybot[ind]) * 0.3
   else:
     wavybot[ind] -= np.min(wavybot[ind])
-    wavybot[ind] = wavybot[ind] / np.max(wavybot[ind]) * 25.0
+    wavybot[ind] = wavybot[ind] / np.max(wavybot[ind]) * 5
 
 
 wavytop = np.cumsum(np.random.randn(nwave))
@@ -226,13 +227,15 @@ for xr in np.arange(0, x[-1], 100e3):
     wavytop[ind] = wavytop[ind] / np.max(wavytop[ind]) * 0.3
   else:
     wavytop[ind] -= np.min(wavytop[ind])
-    wavytop[ind] = wavytop[ind] / np.max(wavytop[ind]) * 25.0
+    wavytop[ind] = wavytop[ind] / np.max(wavytop[ind]) * 5
+
 
 for ind in range(nx):
-  topshape = [3, 3, y[-1]/1000, y[-1] / 1000]
+  topshape = [1.5, 1.5, y[-1]/1000, y[-1]/1000]
   xtop = [0, 180e3, 220e3, 10000e3]
   top = np.interp(x[ind], xtop, topshape)
-  yd = np.array([wavybot[ind], wavybot[ind]+0.5,
+
+  yd = np.array([-top + wavybot[ind], -top + wavybot[ind]+0.5,
                  top-0.5 - wavytop[ind], top - wavytop[ind]])
   dd = np.array([0, 1, 1, 0])
   y0 = np.interp(y, yd*1000, dd)
@@ -244,7 +247,7 @@ print(np.shape(indx))
 d[:, indx] += np.random.rand(ny, len(indx)) * 100
 d[d>0] = 0
 
-d[:, -1] = 200
+d[:, -1] = 0
 # wall West side:
 d[:, 0] = 0
 # put a N/S wall...
@@ -257,18 +260,18 @@ with open(indir+"/topog.bin", "wb") as f:
   d.tofile(f)
 f.close()
 
+
 _log.info(np.shape(d))
 
 fig, ax = plt.subplots(2,1)
 _log.info('%s %s', np.shape(x), np.shape(d))
 print(y)
-ax[0].plot(x/1.e3,d[1,:].T)
+ax[0].plot(x/1.e3,d[int(ny/2),:].T)
 pcm=ax[1].pcolormesh(x/1.e3,y/1.e3,d,rasterized=True)
 #ax[1].set_xlim([0, 200])
 #ax[1].set_ylim([0, 4])
 fig.colorbar(pcm,ax=ax[1])
 fig.savefig(outdir+'/figs/topo.png')
-
 
 ##################
 # dz:
