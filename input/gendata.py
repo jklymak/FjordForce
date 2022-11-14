@@ -407,44 +407,47 @@ taux = 0.5-np.tanh((x-60e3)/30e3)/2
 
 taux = np.broadcast_to(taux[np.newaxis, :], (ny, nx))
 
-print(taux)
-tau = taut[np.newaxis, np.newaxis, :] * taux[:, :, np.newaxis]
+if False:
+  print(taux)
+  tau = taut[:, np.newaxis, np.newaxis] * taux[np.newaxis, :]
 
-print(np.shape(tau))
-fig, ax = plt.subplots(2, 1)
-pc = ax[0].pcolormesh(x, t,  tau[2, :, :].T, rasterized=True, vmin=-taumax, vmax=taumax, cmap='RdBu_r')
-ax[1].pcolormesh(x, y,  tau[:, :, 48], rasterized=True, vmin=-taumax, vmax=taumax, cmap='RdBu_r')
-fig.colorbar(pc, ax=ax)
-fig.savefig(outdir+'/figs/Tau.png')
+  print(np.shape(tau))
+  fig, ax = plt.subplots(2, 1)
+  pc = ax[0].pcolormesh(x, t,  tau[:, 2, :], rasterized=True, vmin=-taumax, vmax=taumax, cmap='RdBu_r')
+  ax[1].pcolormesh(x, y,  tau[48, :, :], rasterized=True, vmin=-taumax, vmax=taumax, cmap='RdBu_r')
+  fig.colorbar(pc, ax=ax)
+  fig.savefig(outdir+'/figs/Tau.png')
 
 with open(indir+'taux.bin', 'wb') as f:
-    tau.T.tofile(f)
+    taux.T.tofile(f)
 
-################################
-# external heat flux
-Qnetmax = 500
-Q = tau / taumax * Qnetmax
+if False:
+  ################################
+  # external heat flux
+  Qnetmax = 500
+  Q = tau / taumax * Qnetmax
 
-with open(indir+'Qnet.bin', 'wb') as f:
-    Q.T.tofile(f)
+  with open(indir+'Qnet.bin', 'wb') as f:
+      Q.T.tofile(f)
 
 ###################################
 # RBCS sponge
-weight = np.zeros((nz, ny, nx))
-weight[..., -100:] = np.linspace(0, 1, 100)**1.5
-# print(weight)
-with open(indir+'spongeweight.bin', 'wb') as f:
-    weight.tofile(f)
+if False:
+  weight = np.zeros((nz, ny, nx))
+  weight[..., -100:] = np.linspace(0, 1, 100)**1.5
+  # print(weight)
+  with open(indir+'spongeweight.bin', 'wb') as f:
+      weight.tofile(f)
 
-# force to zero velocity to prevent reflections.
-# note that we also force T and S to Tinit and Sinit
-weight = np.zeros((nz, ny, nx))
-with open(indir+'Uforce.bin', 'wb') as f:
-    weight.tofile(f)
+  # force to zero velocity to prevent reflections.
+  # note that we also force T and S to Tinit and Sinit
+  weight = np.zeros((nz, ny, nx))
+  with open(indir+'Uforce.bin', 'wb') as f:
+      weight.tofile(f)
 
-weight = np.zeros((nz, ny, nx))
-with open(indir+'Vforce.bin', 'wb') as f:
-    weight.tofile(f)
+  weight = np.zeros((nz, ny, nx))
+  with open(indir+'Vforce.bin', 'wb') as f:
+      weight.tofile(f)
 
 #### Initial O2
 

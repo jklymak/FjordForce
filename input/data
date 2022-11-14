@@ -74,9 +74,9 @@ saltAdvScheme=77,
  rwSuffixType=2,
  periodicExternalForcing=.TRUE.,
 # 14 days
- externForcingCycle=1468800,
+# externForcingCycle=1468800,
 # 1 hour
- externForcingPeriod=3600
+# externForcingPeriod=3600
 /
 
 # Gridding parameters
