@@ -1,3 +1,10 @@
+## Processing
+
+`python/runNsSections.sh`
+`python/runCrossSections.sh`
+
+
+## Runs
 Cancelled 36063372                                           Bute3d02  jklymak  R 1-13:04:43      1 cdr2133
    straight sides, nonhydrostatic, big gyre evolves...
 Done 36097063                                           Bute3d03  jklymak  R 1-23:47:39      1 cdr2327
@@ -122,6 +129,14 @@ Does receiving basin matter?  Maybe I'm wrong and should just be using rbcs?
    - same as Bute3d27, but with f=0.  Time series shows that changing f doesn't
    change the timing, but 3-d runs are very different (I assume).
    Issue with this rn is that it _still_ has some N/S assymetry
+
+Skiped Bute3d29
+
+50220744 Bute3d03
+- as above, but symmetric receiving basin
+
+50220995 Bute3d31
+- as above w f=0
 
 
 

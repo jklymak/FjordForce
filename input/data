@@ -29,8 +29,8 @@
  nonHydrostatic=.FALSE.,
  hFacMin=0.1,
  bottomDragQuadratic=2.E-3,
- viscC2Leith = 1e-3
- viscC2LeithD = 1e-3
+# viscC2Leith = 1e-3
+# viscC2LeithD = 1e-3
 # tempAdvScheme=77,
 # implicSurfPress=0.5,
 # implicDiv2DFlow=0.5,

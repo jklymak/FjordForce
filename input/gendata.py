@@ -23,19 +23,24 @@ wind = 10  # m/s
 uw = wind
 lat = 0
 f0 = 1e-4 * np.sin(lat * np.pi / 180) / np.sin(45 * np.pi / 180)
+wavey = False
 Nsq0 = 3.44e-4
 tAlpha = 0.0e-4
 sBeta = 7.4e-4
 Nsqfac = 1.0
 Nsq0 = Nsq0 * Nsqfac
 
-runname='Bute3d31'
+runname='Bute3d32'
 comments = f"""
 Symmetric, bigger receiving
 basin with roughness in it.  Tau={wind**2*1e-3} N/m^2 ({wind} m/s) versus 0.225 N/m^2.
 Lat = {lat}; f={f0:1.3e}
 Constant Nsq0={Nsq0}.
 No wind startup = just turn it on.  No Coriolis.
+Remove the roughness wavey = {wavey}.
+I don't understand why there is still assymetry even if f=0...
+Not as aggressive a grid growth?
+Leith off?
 """
 
 outdir0='../results/'+runname+'/'
@@ -159,7 +164,7 @@ _log.info("Done copying files")
 
 dx = np.zeros(nx) + dx0
 for i in range(nx-200, nx):
-    dx[i] = dx[i-1] * 1.035
+    dx[i] = dx[i-1] * 1.02
 
 
 # dx = zeros(nx)+100.
@@ -172,9 +177,9 @@ _log.info('XCoffset=%1.4f'%x[0])
 
 dy = np.ones(ny) * dy0
 for i in range(int(ny/2) + 20, ny):
-  dy[i] = dy[i-1] * 1.07
+  dy[i] = dy[i-1] * 1.035
 for i in range(int(ny/2) - 20, 0, -1):
-  dy[i] = dy[i+1] * 1.07
+  dy[i] = dy[i+1] * 1.035
 y=np.cumsum(dy)
 y = y - y[int(ny/2)]
 
@@ -229,6 +234,9 @@ for xr in np.arange(0, x[-1], 100e3):
     wavytop[ind] -= np.min(wavytop[ind])
     wavytop[ind] = wavytop[ind] / np.max(wavytop[ind]) * 5
 
+if not wavey:
+  wavytop = 0 * wavytop
+  wavybot = 0 * wavytop
 
 for ind in range(nx):
   topshape = [1.5, 1.5, y[-1]/1000, y[-1]/1000]
