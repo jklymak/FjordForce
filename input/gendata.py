@@ -39,8 +39,9 @@ Constant Nsq0={Nsq0}.
 No wind startup = just turn it on.  No Coriolis.
 Remove the roughness wavey = {wavey}.
 I don't understand why there is still assymetry even if f=0...
-Not as aggressive a grid growth?
+Not as aggressive a grid growth.
 Leith off?
+advschemes = 77 for both salt and temp
 """
 
 outdir0='../results/'+runname+'/'
@@ -48,11 +49,11 @@ outdir0='../results/'+runname+'/'
 indir =outdir0+'/indata/'
 
 dx0=50.
-dy0=75.
+dy0=50.
 
 # model size
-nx = 32 * 60
-ny = 3 * 40
+nx = 24 * 80
+ny = 4 * 60
 nz = 66
 
 _log.info('nx %d ny %d', nx, ny)
@@ -163,8 +164,8 @@ _log.info("Done copying files")
 ##### Dx ######
 
 dx = np.zeros(nx) + dx0
-for i in range(nx-200, nx):
-    dx[i] = dx[i-1] * 1.02
+for i in range(nx-250, nx):
+    dx[i] = dx[i-1] * 1.025
 
 
 # dx = zeros(nx)+100.
@@ -177,9 +178,9 @@ _log.info('XCoffset=%1.4f'%x[0])
 
 dy = np.ones(ny) * dy0
 for i in range(int(ny/2) + 20, ny):
-  dy[i] = dy[i-1] * 1.035
+  dy[i] = dy[i-1] * 1.045
 for i in range(int(ny/2) - 20, 0, -1):
-  dy[i] = dy[i+1] * 1.035
+  dy[i] = dy[i+1] * 1.045
 y=np.cumsum(dy)
 y = y - y[int(ny/2)]
 
@@ -217,10 +218,10 @@ for xr in np.arange(0, x[-1], 100e3):
   ind = np.nonzero((x>=xr) & (x<xr+100e3))
   if xr <= 230e3:
     wavybot[ind] -= np.min(wavybot[ind])
-    wavybot[ind] = wavybot[ind] / np.max(wavybot[ind]) * 0.3
+    wavybot[ind] = wavybot[ind] / np.max(wavybot[ind]) * 0
   else:
     wavybot[ind] -= np.min(wavybot[ind])
-    wavybot[ind] = wavybot[ind] / np.max(wavybot[ind]) * 5
+    wavybot[ind] = wavybot[ind] / np.max(wavybot[ind]) * 20
 
 
 wavytop = np.cumsum(np.random.randn(nwave))
@@ -229,14 +230,14 @@ for xr in np.arange(0, x[-1], 100e3):
   ind = np.nonzero((x>=xr) & (x<xr+100e3))
   if xr <= 230e3:
     wavytop[ind] -= np.min(wavytop[ind])
-    wavytop[ind] = wavytop[ind] / np.max(wavytop[ind]) * 0.3
+    wavytop[ind] = wavytop[ind] / np.max(wavytop[ind]) * 0
   else:
     wavytop[ind] -= np.min(wavytop[ind])
-    wavytop[ind] = wavytop[ind] / np.max(wavytop[ind]) * 5
+    wavytop[ind] = wavytop[ind] / np.max(wavytop[ind]) * 20
 
-if not wavey:
-  wavytop = 0 * wavytop
-  wavybot = 0 * wavytop
+#if not wavey:
+#  wavytop = 0 * wavytop
+#  wavybot = 0 * wavytop
 
 for ind in range(nx):
   topshape = [1.5, 1.5, y[-1]/1000, y[-1]/1000]
@@ -244,15 +245,15 @@ for ind in range(nx):
   top = np.interp(x[ind], xtop, topshape)
 
   yd = np.array([-top + wavybot[ind], -top + wavybot[ind]+0.5,
-                 top-0.5 - wavytop[ind], top - wavytop[ind]])
+                 top-0.5 - wavybot[ind], top - wavybot[ind]])
   dd = np.array([0, 1, 1, 0])
   y0 = np.interp(y, yd*1000, dd)
   d[:, ind] = d[:, ind] * y0
 
 print(np.shape(x))
-indx = np.nonzero(x > 600e3)[0]
+indx = np.nonzero(x > 200e3)[0]
 print(np.shape(indx))
-d[:, indx] += np.random.rand(ny, len(indx)) * 100
+d[:, indx] += np.random.rand(ny, len(indx)) * 20
 d[d>0] = 0
 
 d[:, -1] = 0
