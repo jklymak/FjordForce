@@ -138,6 +138,12 @@ Skiped Bute3d29
 50220995 Bute3d31
 - as above w f=0
 
+50502219 Bute3d32
+- OK, still has assymetry.  Then realized I was probably
+putting the wind in incorrectly!  Should be fixed.  Made the basins symmetric just in case.
+May not need such a massive basin.  This run has f=0.  Turned off Leith, adv schems=77, dt = 10 s.
 
+50502382 Bute3d33
+- As above f=1e-4
 
 
