@@ -21,7 +21,7 @@ duration = 17
 initial = 0
 wind = 10  # m/s
 uw = wind
-lat = 0
+lat = 45
 f0 = 1e-4 * np.sin(lat * np.pi / 180) / np.sin(45 * np.pi / 180)
 wavey = False
 Nsq0 = 3.44e-4
@@ -36,7 +36,7 @@ Symmetric, bigger receiving
 basin with roughness in it.  Tau={wind**2*1e-3} N/m^2 ({wind} m/s) versus 0.225 N/m^2.
 Lat = {lat}; f={f0:1.3e}
 Constant Nsq0={Nsq0}.
-No wind startup = just turn it on.  No Coriolis.
+No wind startup = just turn it on.
 Remove the roughness wavey = {wavey}.
 I don't understand why there is still assymetry even if f=0...
 Not as aggressive a grid growth.
