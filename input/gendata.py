@@ -21,7 +21,7 @@ duration = 17
 initial = 0
 wind = 10  # m/s
 uw = wind
-lat = 0
+lat = 45
 f0 = 1e-4 * np.sin(lat * np.pi / 180) / np.sin(45 * np.pi / 180)
 wavey = False
 Nsq0 = 3.44e-4
@@ -30,7 +30,7 @@ sBeta = 7.4e-4
 Nsqfac = 1.0
 Nsq0 = Nsq0 * Nsqfac
 
-runname='Bute3d32'
+runname='Bute3d33'
 comments = f"""
 Symmetric, bigger receiving
 basin with roughness in it.  Tau={wind**2*1e-3} N/m^2 ({wind} m/s) versus 0.225 N/m^2.
