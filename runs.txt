@@ -3,6 +3,8 @@
 `python/runNsSections.sh`
 `python/runCrossSections.sh`
 
+Check status `ssh cedar1.cedar.computecanada.ca 'cd myproject/ButeWinds3D/input; source ~/venvs/butewind/bin/activate; python check_status.py Bute3d33'`
+
 
 ## Runs
 Cancelled 36063372                                           Bute3d02  jklymak  R 1-13:04:43      1 cdr2133
@@ -138,13 +140,14 @@ Skiped Bute3d29
 50220995 Bute3d31
 - as above w f=0
 
- Bute3d32 50511515
+ Bute3d32 50528434
 - OK, still has assymetry.  Then realized I was probably
 putting the wind in incorrectly!  Should be fixed.  Made the basins symmetric just in case.
 May not need such a massive basin.  This run has f=0.  Turned off Leith, adv schems=77, dt = 10 s.
-Definitely much better!  But have to back to dt=4.  Went unstable
+Definitely much better!  But have to back to dt=4.  Went unstable.  Seems to be working with 4 s.
+Could maybe do 6 s, but...
 
- Bute3d33 Not run yet
+ Bute3d33 50573016
 - As above f=1e-4
 
 

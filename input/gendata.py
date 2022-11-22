@@ -30,7 +30,7 @@ sBeta = 7.4e-4
 Nsqfac = 1.0
 Nsq0 = Nsq0 * Nsqfac
 
-runname='Bute3d33'
+runname='Bute3d34'
 comments = f"""
 Symmetric, bigger receiving
 basin with roughness in it.  Tau={wind**2*1e-3} N/m^2 ({wind} m/s) versus 0.225 N/m^2.
@@ -42,6 +42,7 @@ I don't understand why there is still assymetry even if f=0...
 Not as aggressive a grid growth.
 Leith off?
 advschemes = 77 for both salt and temp
+Add a sponge again....
 """
 
 outdir0='../results/'+runname+'/'
@@ -432,7 +433,7 @@ if False:
 
 ###################################
 # RBCS sponge
-if False:
+if True:
   weight = np.zeros((nz, ny, nx))
   weight[..., -100:] = np.linspace(0, 1, 100)**1.5
   # print(weight)
