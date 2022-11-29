@@ -30,7 +30,7 @@ sBeta = 7.4e-4
 Nsqfac = 1.0
 Nsq0 = Nsq0 * Nsqfac
 
-runname='Bute3d34'
+runname='Bute3d35'
 comments = f"""
 Symmetric, bigger receiving
 basin with roughness in it.  Tau={wind**2*1e-3} N/m^2 ({wind} m/s) versus 0.225 N/m^2.
@@ -42,7 +42,8 @@ I don't understand why there is still assymetry even if f=0...
 Not as aggressive a grid growth.
 Leith off?
 advschemes = 77 for both salt and temp
-Add a sponge again....
+No sponge.  Step temperature, and make temperature zero in inlet and 10 everywhere else.
+This will allow us to determine the next exchange of tracer between the basin and inlet.
 """
 
 outdir0='../results/'+runname+'/'
@@ -130,6 +131,7 @@ replace_data('data', 'sBlpha', f'{sBeta:1.3e}')
 shutil.copy('data', outdir+'/data')
 shutil.copy('eedata', outdir)
 shutil.copy('data.kl10', outdir)
+shutil.copy('moddata.py', outdir)
 try:
   shutil.copy('data.kpp', outdir)
 except:
@@ -341,6 +343,14 @@ plt.plot(T0,z)
 plt.savefig(outdir+'/figs/TO.png')
 
 T0 = np.broadcast_to(T0[:, np.newaxis, np.newaxis], (nz, ny, nx ))
+
+
+if tAlpha == 0:
+  inx = x<100e3
+  T0 = T0 * 0 + 10.0
+  T0[:, :, inx] = 0.0
+
+
 print(np.shape(T0))
 with open(indir+"/TInit.bin", "wb") as f:
 	T0.tofile(f)
