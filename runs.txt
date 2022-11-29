@@ -150,4 +150,20 @@ Could maybe do 6 s, but...
  Bute3d33 50573016
 - As above f=1e-4
 
+Bute3d34
+- With sponge BC.  Didn't matter so removed....
+
+Bute3d35 51554260
+As above no sponge.  Temperature set to 0 in inlet 10 > 100 km.  This is meant to be a tracer
+of exchange into the inlet
+
+Bute3d36
+
+As above, 2 * Nsq0
+
+Bute3d37
+
+As above, Nsq0 / 2
+
+
 
