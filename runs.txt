@@ -153,17 +153,17 @@ Could maybe do 6 s, but...
 Bute3d34
 - With sponge BC.  Didn't matter so removed....
 
-Bute3d35 51554260
+Bute3d35 51625481
 As above no sponge.  Temperature set to 0 in inlet 10 > 100 km.  This is meant to be a tracer
 of exchange into the inlet
+- mysteriously just hung at beginning of run...
 
 Bute3d36
-
-As above, 2 * Nsq0
+- As above, 2 * Nsq0
+- cancelled
 
 Bute3d37
-
-As above, Nsq0 / 2
-
+- As above, Nsq0 / 2
+- cancelled
 
 

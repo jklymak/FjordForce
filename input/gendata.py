@@ -27,10 +27,10 @@ wavey = False
 Nsq0 = 3.44e-4
 tAlpha = 0.0e-4
 sBeta = 7.4e-4
-Nsqfac = 0.5
+Nsqfac = 1
 Nsq0 = Nsq0 * Nsqfac
 
-runname='Bute3d37'
+runname='Bute3d35'
 comments = f"""
 Symmetric, bigger receiving
 basin with roughness in it.  Tau={wind**2*1e-3} N/m^2 ({wind} m/s) versus 0.225 N/m^2.
@@ -347,8 +347,8 @@ T0 = np.broadcast_to(T0[:, np.newaxis, np.newaxis], (nz, ny, nx ))
 
 if tAlpha == 0:
   inx = x<100e3
-  T0 = T0 * 0 + 10.0
-  T0[:, :, inx] = 0.0
+  T0 = T0 * 0 + 20.0
+  T0[:, :, inx] = 10.0
 
 
 print(np.shape(T0))
