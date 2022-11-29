@@ -27,10 +27,10 @@ wavey = False
 Nsq0 = 3.44e-4
 tAlpha = 0.0e-4
 sBeta = 7.4e-4
-Nsqfac = 2
+Nsqfac = 0.5
 Nsq0 = Nsq0 * Nsqfac
 
-runname='Bute3d36'
+runname='Bute3d37'
 comments = f"""
 Symmetric, bigger receiving
 basin with roughness in it.  Tau={wind**2*1e-3} N/m^2 ({wind} m/s) versus 0.225 N/m^2.
