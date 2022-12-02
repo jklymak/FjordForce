@@ -158,11 +158,11 @@ As above no sponge.  Temperature set to 0 in inlet 10 > 100 km.  This is meant t
 of exchange into the inlet
 - mysteriously just hung at beginning of run...
 
-Bute3d36
+Bute3d36 51554309
 - As above, 2 * Nsq0
 - cancelled
 
-Bute3d37
+Bute3d37 51632659
 - As above, Nsq0 / 2
 - cancelled
 
