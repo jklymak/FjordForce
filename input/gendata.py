@@ -19,7 +19,7 @@ _log = logging.getLogger(__name__)
 
 duration = 17
 initial = 0
-wind = 20  # m/s
+wind = 20  # m/s *3.6 to get km/h, wind**2 / 1000 to get stress
 uw = wind
 lat = 45
 f0 = 1e-4 * np.sin(lat * np.pi / 180) / np.sin(45 * np.pi / 180)
@@ -30,7 +30,7 @@ sBeta = 7.4e-4
 Nsqfac = 1
 Nsq0 = Nsq0 * Nsqfac
 
-runname='Bute3d39'
+runname='Bute3d40'
 comments = f"""
 Symmetric, bigger receiving
 basin with roughness in it.  Tau={wind**2*1e-3} N/m^2 ({wind} m/s) versus 0.225 N/m^2.
@@ -414,20 +414,28 @@ else:
   taut = taut * 0 + taumax
 
 taux = np.exp(-x/30000)
-taux = 0.5-np.tanh((x-60e3)/30e3)/2
+taux = 0.5 - np.tanh((x-60e3)/30e3)/2
 
 taux = np.broadcast_to(taux[np.newaxis, :], (ny, nx))
 
 if False:
   print(taux)
   tau = taut[:, np.newaxis, np.newaxis] * taux[np.newaxis, :]
-
   print(np.shape(tau))
   fig, ax = plt.subplots(2, 1)
   pc = ax[0].pcolormesh(x, t,  tau[:, 2, :], rasterized=True, vmin=-taumax, vmax=taumax, cmap='RdBu_r')
   ax[1].pcolormesh(x, y,  tau[48, :, :], rasterized=True, vmin=-taumax, vmax=taumax, cmap='RdBu_r')
   fig.colorbar(pc, ax=ax)
   fig.savefig(outdir+'/figs/Tau.png')
+else:
+  tau = taux * taumax
+  fig, ax = plt.subplots(2, 1)
+  # pc = ax[0].pcolormesh(x, t,  tau[:, :], rasterized=True, vmin=-taumax, vmax=taumax, cmap='RdBu_r')
+  pc = ax[1].pcolormesh(x, y, tau[:, :], rasterized=True, vmin=-taumax, vmax=taumax, cmap='RdBu_r')
+  fig.colorbar(pc, ax=ax)
+  fig.savefig(outdir+'/figs/Tau.png')
+
+
 
 with open(indir+'taux.bin', 'wb') as f:
     taux.tofile(f)

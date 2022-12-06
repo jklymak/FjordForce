@@ -166,4 +166,13 @@ Bute3d37 51632659
 - As above, Nsq0 / 2
 - cancelled
 
+Bute3d38 51860701
+- tau = 0.225
+
+Bute3d39 51860705
+- tau = 0.4
+
+
+
+
 
