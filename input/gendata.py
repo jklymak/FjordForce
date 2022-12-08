@@ -19,7 +19,7 @@ _log = logging.getLogger(__name__)
 
 duration = 17
 initial = 0
-wind = 15  # m/s *3.6 to get km/h, wind**2 / 1000 to get stress
+wind = 20  # m/s *3.6 to get km/h, wind**2 / 1000 to get stress
 uw = wind
 lat = 45
 f0 = 1e-4 * np.sin(lat * np.pi / 180) / np.sin(45 * np.pi / 180)
@@ -30,7 +30,7 @@ sBeta = 7.4e-4
 Nsqfac = 1
 Nsq0 = Nsq0 * Nsqfac
 
-runname='Bute3d41'
+runname='Bute3d42'
 comments = f"""
 Symmetric, bigger receiving
 basin with roughness in it.  Tau={wind**2*1e-3} N/m^2 ({wind} m/s) versus 0.225 N/m^2.
