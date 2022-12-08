@@ -438,7 +438,7 @@ else:
 
 
 with open(indir+'taux.bin', 'wb') as f:
-    taux.tofile(f)
+    tau.tofile(f)
 
 if False:
   ################################
