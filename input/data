@@ -20,7 +20,7 @@
  f0=1.000e-04,
  beta=0.E-11,
  eosType='LINEAR',
- tAlpha=0.000e+00,
+ tAlpha=2.000e-04,
  sBeta =7.4E-4,
  gravity=9.81,
  implicitFreeSurface=.TRUE.,

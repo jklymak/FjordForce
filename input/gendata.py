@@ -25,25 +25,27 @@ lat = 45
 f0 = 1e-4 * np.sin(lat * np.pi / 180) / np.sin(45 * np.pi / 180)
 wavey = False
 Nsq0 = 3.44e-4
-tAlpha = 0.0e-4
+NsqConstant = False
+tAlpha = 2.0e-4
 sBeta = 7.4e-4
+# Note this still works
 Nsqfac = 1
 Nsq0 = Nsq0 * Nsqfac
 
-runname='Bute3d42'
+runname='Bute3d43'
 comments = f"""
 Symmetric, bigger receiving
 basin with roughness in it.  Tau={wind**2*1e-3} N/m^2 ({wind} m/s) versus 0.225 N/m^2.
 Lat = {lat}; f={f0:1.3e}
-Constant Nsq0={Nsq0}.
+Varying Nsq; steady forcing....
 No wind startup = just turn it on.
 Remove the roughness wavey = {wavey}.
 I don't understand why there is still assymetry even if f=0...
 Not as aggressive a grid growth.
 Leith off?
 advschemes = 77 for both salt and temp
-No sponge.  Step temperature, and make temperature zero in inlet and 10 everywhere else.
-This will allow us to determine the next exchange of tracer between the basin and inlet.
+No sponge.
+Temperature NOT Passive.  Need real temperature profile...
 """
 
 outdir0='../results/'+runname+'/'
@@ -345,7 +347,7 @@ plt.savefig(outdir+'/figs/TO.png')
 T0 = np.broadcast_to(T0[:, np.newaxis, np.newaxis], (nz, ny, nx ))
 
 
-if tAlpha == 0:
+if NsqConstant:
   inx = x<100e3
   T0 = T0 * 0 + 20.0
   T0[:, :, inx] = 10.0
@@ -362,7 +364,7 @@ f.close()
 # salinity profile...
 #
 # FRom
-if tAlpha > 0:
+if not NsqConstant:
   s = np.array([15, 15, 29.1, 29.6, 30.1, 30.6, 30.66, 30.66])
   S0 =  30.6 - 15*np.exp(-z / 20)
 
@@ -481,6 +483,15 @@ with open(indir+'O2n.bin', 'wb') as f:
 fig, ax = plt.subplots()
 ax.plot(O2z, z)
 fig.savefig(outdir+'/figs/O2.png')
+
+### Initial passive tracer
+inx = x<100e3
+O2 = O2 * 0 + 20.0
+O2[:, :, inx]= 10.0
+
+with open(indir+'Passive.bin', 'wb') as f:
+    O2.tofile(f)
+
 
 _log.info('All Done!')
 

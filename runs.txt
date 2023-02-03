@@ -153,6 +153,9 @@ Could maybe do 6 s, but...
 Bute3d34
 - With sponge BC.  Didn't matter so removed....
 
+## Good runs (finally!, mostly...)
+### 100 km/h winds...
+
 Bute3d35 51625481
 As above no sponge.  Temperature set to 0 in inlet 10 > 100 km.  This is meant to be a tracer
 of exchange into the inlet
@@ -160,11 +163,11 @@ of exchange into the inlet
 
 Bute3d36 51554309
 - As above, 2 * Nsq0
-- cancelled
 
 Bute3d37 51632659
 - As above, Nsq0 / 2
-- cancelled
+
+### Wrong wind forcing: don't use
 
 Bute3d38 51860701
 - tau = 0.225
@@ -172,12 +175,22 @@ Bute3d38 51860701
 Bute3d39 51860705
 - tau = 0.4
 
+### Fixed wind forcing
+
 Bute3d40 52501941
  - tau = 0.1 (10 m/s)
+
 Bute3d41 52501945
 - tau = 0.225 (15 m/s)
+
 Bute3d42 52505624
  - tau = 0.4 (20 m/s)
+
+### Resdtart from 3days
+Bute3d42Stop3d
+ - tau = 0.4 (20 m/s)
+ - as above, but winds stop after three days...
+
 
 
 
