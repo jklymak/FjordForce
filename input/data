@@ -59,7 +59,7 @@ saltAdvScheme=77,
 
 # Time stepping parameters
  &PARM03
- startTime=259200,
+ startTime=0,
 # nTimeSteps=480,
  endTime=1036800,
  deltaT=6.0,
@@ -96,5 +96,5 @@ saltAdvScheme=77,
  bathyFile='../indata/topog.bin',
 # meridWindFile=,
 # surfQnetFile=  '../indata/Qnet.bin',
- zonalWindFile=,
+ zonalWindFile='../indata/taux.bin',
  /

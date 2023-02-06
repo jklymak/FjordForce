@@ -191,6 +191,10 @@ Bute3d42Stop3d
  - tau = 0.4 (20 m/s)
  - as above, but winds stop after three days...
 
+### Real stratification Steady
+Bute3d43
+- 20 m/s wind
+
 
 
 
