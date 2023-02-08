@@ -192,7 +192,8 @@ Bute3d42Stop3d
  - as above, but winds stop after three days...
 
 ### Real stratification Steady
-Bute3d43
+Bute3d43 58741920
+- running again because I wasn't forcing wind...
 - 20 m/s wind
 
 
