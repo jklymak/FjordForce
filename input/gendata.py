@@ -18,7 +18,7 @@ logging.basicConfig(level=logging.INFO)
 _log = logging.getLogger(__name__)
 
 duration = 17
-initial = 0
+initial = False
 wind = 20  # m/s *3.6 to get km/h, wind**2 / 1000 to get stress
 uw = wind
 lat = 45
@@ -402,14 +402,14 @@ with open(indir+"/SInit.bin", "wb") as f:
 
 ############################
 # external wind stress
-nt = 17 * 24
+nt = 24  # days
 Cd = 1e-3
 taumax = Cd * uw**2  # N/m^2
-t = np.arange(nt*1.0)  # hours
+t = np.arange(nt*1.0)  # days
 taut = 0 * t
 
-if initial == 1:
-  taut[t<=24] = np.arange(25) / 24 * taumax
+if initial:
+  taut[t<=24] = np.arange(25) * taumax
   taut[(t>24) & (t<((duration + 1)*24))] = taumax
   taut[(t>=(duration + 1)*24) & (t<(duration + 2)*24)] = np.arange(23, -1, -1) / 24 * taumax
 else:
@@ -420,13 +420,13 @@ taux = 0.5 - np.tanh((x-60e3)/30e3)/2
 
 taux = np.broadcast_to(taux[np.newaxis, :], (ny, nx))
 
-if False:
+if True:
   print(taux)
-  tau = taut[:, np.newaxis, np.newaxis] * taux[np.newaxis, :]
+  tau = taut[:, np.newaxis, np.newaxis] * taux[np.newaxis, ...]
   print(np.shape(tau))
   fig, ax = plt.subplots(2, 1)
   pc = ax[0].pcolormesh(x, t,  tau[:, 2, :], rasterized=True, vmin=-taumax, vmax=taumax, cmap='RdBu_r')
-  ax[1].pcolormesh(x, y,  tau[48, :, :], rasterized=True, vmin=-taumax, vmax=taumax, cmap='RdBu_r')
+  ax[1].pcolormesh(x, y,  tau[2, :, :], rasterized=True, vmin=-taumax, vmax=taumax, cmap='RdBu_r')
   fig.colorbar(pc, ax=ax)
   fig.savefig(outdir+'/figs/Tau.png')
 else:

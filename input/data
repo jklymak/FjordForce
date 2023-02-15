@@ -71,11 +71,11 @@ saltAdvScheme=77,
  monitorFreq=1800.,
  monitorSelect=2,
  rwSuffixType=2,
-# periodicExternalForcing=.TRUE.,
-# 14 days
-# externForcingCycle=1468800,
-# 1 hour
-# externForcingPeriod=3600
+ periodicExternalForcing=.TRUE.,
+# 24 days
+ externForcingCycle=2073600,
+# 1 day
+ externForcingPeriod=86400,
 /
 
 # Gridding parameters
