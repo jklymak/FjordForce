@@ -112,8 +112,8 @@ C Example of how to add forcing at the surface
 c Convert from ml/l to umol/kg  (7 mL/L = 312 umol/kg)
              O2sat = O2sat/22391.6 _d 0 * 1. _d 6
 C            the drag co-efficient that I am using is 1e-3
-             windsq = (ABS(taux0(i, j, bi, bj)) +
-     &                 ABS(tauy0(i, j, bi, bj))) / 1. _d -3
+             windsq = (ABS(fu(i, j, bi, bj)) +
+     &                 ABS(fv(i, j, bi, bj))) / 1. _d -3
              pisvel = 0.337 _d 0 * windsq / 3.6 _d 5
              Kwexch = pisvel / sqrt(SchmidtNoO2 / 660.0 _d 0)
 C            Note no atmospheric pressure correction here...
