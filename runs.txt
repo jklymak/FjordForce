@@ -196,6 +196,8 @@ Bute3d43 58741920
 - running again because I wasn't forcing wind...
 - 20 m/s wind
 
+Bute3d43Stop5d 60172281
+- as above, but with wind turned off after day 5
 
 
 
