@@ -1,0 +1,18 @@
+workdir? /project/6001902/jklymak/ButeWinds3D/python
+/project/6001902/jklymak/ButeWinds3D/python
+done activate/home/jklymak/venvs/butewind/bin/python
+/home/jklymak/venvs/butewind/lib/python3.9/site-packages/xmitgcm/mds_store.py:196: FutureWarning: elementwise comparison failed; returning scalar instead, but in the future will perform elementwise comparison
+  if iters == 'all':
+Traceback (most recent call last):
+  File "/home/jklymak/venvs/butewind/lib/python3.9/site-packages/xmitgcm/mds_store.py", line 202, in open_mdsdataset
+    iternum = int(iters)
+TypeError: only size-1 arrays can be converted to Python scalars
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/project/6001902/jklymak/ButeWinds3D/python/NsSections.py", line 26, in <module>
+    with xmitgcm.open_mdsdataset(f'../results/{runname}/input/',
+  File "/home/jklymak/venvs/butewind/lib/python3.9/site-packages/xmitgcm/mds_store.py", line 218, in open_mdsdataset
+    raise IOError("Could not find the expected file "
+OSError: Could not find the expected file prefixes ['spinup', 'spinup2d'] at iternum 0. (Instead found [])

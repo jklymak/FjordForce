@@ -1,0 +1,13 @@
+workdir? /project/6001902/jklymak/ButeWinds3D/python
+/project/6001902/jklymak/ButeWinds3D/python
+done activate/home/jklymak/venvs/butewind/bin/python
+/home/jklymak/venvs/butewind/lib/python3.9/site-packages/xmitgcm/mds_store.py:196: FutureWarning: elementwise comparison failed; returning scalar instead, but in the future will perform elementwise comparison
+  if iters == 'all':
+/home/jklymak/venvs/butewind/lib/python3.9/site-packages/xarray/backends/netCDF4_.py:488: UserWarning: endian-ness of dtype and endian kwarg do not match, using endian kwarg
+  nc4_var = self.ds.createVariable(
+mkdir: Dropbox/ButeWinds/Bute3d43/: File exists
+building file list ... done
+NsSecCoarseBute3d43.nc
+
+sent 19,088,554 bytes  received 115,038 bytes  7,681,436.80 bytes/sec
+total size is 658,881,229  speedup is 34.31

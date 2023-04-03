@@ -1,0 +1,4 @@
+workdir? /project/6001902/jklymak/ButeWinds3D/python
+/project/6001902/jklymak/ButeWinds3D/python
+done activate/home/jklymak/venvs/butewind/bin/python
+slurmstepd: error: *** JOB 63198991 ON cdr471 CANCELLED AT 2023-03-22T16:54:12 ***

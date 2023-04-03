@@ -1,0 +1,11 @@
+workdir? /project/6001902/jklymak/ButeWinds3D/python
+/project/6001902/jklymak/ButeWinds3D/python
+done activate/home/jklymak/venvs/butewind/bin/python
+/home/jklymak/venvs/butewind/lib/python3.9/site-packages/xarray/backends/netCDF4_.py:488: UserWarning: endian-ness of dtype and endian kwarg do not match, using endian kwarg
+  nc4_var = self.ds.createVariable(
+building file list ... done
+CrossSecBute3d43Stop7d.nc
+
+sent 150,198,450 bytes  received 46 bytes  60,079,398.40 bytes/sec
+total size is 150,179,976  speedup is 1.00
+Warning, not doing  [432000, 518400, 2160000, 2246400, 2332800, 2419200, 2505600]
