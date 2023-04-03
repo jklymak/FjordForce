@@ -12,6 +12,8 @@ from maketopo import getTopo2D
 import logging
 import pandas as pd
 from replace_data import replace_data
+from local_utils import o2sat
+
 
 logging.basicConfig(level=logging.INFO)
 
@@ -25,27 +27,21 @@ lat = 45
 f0 = 1e-4 * np.sin(lat * np.pi / 180) / np.sin(45 * np.pi / 180)
 wavey = False
 Nsq0 = 3.44e-4
-NsqConstant = False
+NsqConstant = True
 tAlpha = 2.0e-4
 sBeta = 7.4e-4
 # Note this still works
 Nsqfac = 1
 Nsq0 = Nsq0 * Nsqfac
 
-runname='Bute3d43'
+runname='Bute3d50'
 comments = f"""
-Symmetric, bigger receiving
-basin with roughness in it.  Tau={wind**2*1e-3} N/m^2 ({wind} m/s) versus 0.225 N/m^2.
+As run 43.  Tau={wind**2*1e-3} N/m^2 ({wind} m/s)
 Lat = {lat}; f={f0:1.3e}
-Varying Nsq; steady forcing....
-No wind startup = just turn it on.
-Remove the roughness wavey = {wavey}.
-I don't understand why there is still assymetry even if f=0...
-Not as aggressive a grid growth.
-Leith off?
+Constant Nsq; steady forcing....
 advschemes = 77 for both salt and temp
-No sponge.
-Temperature NOT Passive.  Need real temperature profile...
+Constant Nsq, Temperature passive, but set to something that will
+have reasonable flux.  Can't vary in space!  8.9 degrees C about right.
 """
 
 outdir0='../results/'+runname+'/'
@@ -69,7 +65,7 @@ def lininc(n,Dx,dx0):
 
 
 #### Set up the output directory
-backupmodel=1
+backupmodel = True
 if backupmodel:
   try:
     mkdir(outdir0)
@@ -344,18 +340,24 @@ plt.clf()
 plt.plot(T0,z)
 plt.savefig(outdir+'/figs/TO.png')
 
-T0 = np.broadcast_to(T0[:, np.newaxis, np.newaxis], (nz, ny, nx ))
+Temp = np.broadcast_to(T0[:, np.newaxis, np.newaxis], (nz, ny, nx ))
 
 
 if NsqConstant:
-  inx = x<100e3
-  T0 = T0 * 0 + 20.0
-  T0[:, :, inx] = 10.0
+  if False:
+
+    inx = x<100e3
+    T0 = T0 * 0 + 20.0
+    T0[:, :, inx] = 10.0
+  else:
+    # constant
+    T0 = 0 * T0 + 8.9
+    Temp = 0 * Temp + 8.9
 
 
-print(np.shape(T0))
+print(np.shape(Temp))
 with open(indir+"/TInit.bin", "wb") as f:
-	T0.tofile(f)
+	Temp.tofile(f)
 f.close()
 
 
@@ -395,10 +397,10 @@ except:
   pass
 plt.savefig(outdir+'/figs/SO.png')
 
-S0 = np.broadcast_to(S0[:, np.newaxis, np.newaxis], (nz, ny, nx ))
+S = np.broadcast_to(S0[:, np.newaxis, np.newaxis], (nz, ny, nx ))
 
 with open(indir+"/SInit.bin", "wb") as f:
-	S0.tofile(f)
+	S.tofile(f)
 
 ############################
 # external wind stress
@@ -453,7 +455,7 @@ if False:
 
 ###################################
 # RBCS sponge
-if True:
+if False:
   weight = np.zeros((nz, ny, nx))
   weight[..., -100:] = np.linspace(0, 1, 100)**1.5
   # print(weight)
@@ -471,14 +473,24 @@ if True:
       weight.tofile(f)
 
 #### Initial O2
-
 O2 = np.zeros((nz, ny, nx))
-O2z = np.interp(z, [0, 25, 120, 150, 1000], [7, 5, 2, 2.7, 2.7]) / 22.4 * 1e3  # umol/kg
-O2 = O2 + O2z[:, np.newaxis, np.newaxis]
-with open(indir+'O2.bin', 'wb') as f:
-    O2.tofile(f)
-with open(indir+'O2n.bin', 'wb') as f:
-    O2.tofile(f)
+if not NsqConstant:
+  O2 = np.zeros((nz, ny, nx))
+
+  O2z = np.interp(z, [0, 25, 120, 150, 1000], [7, 5, 2, 2.7, 2.7]) / 22.4 * 1e3  # umol/kg
+  O2 = O2 + O2z[:, np.newaxis, np.newaxis]
+  with open(indir+'O2.bin', 'wb') as f:
+      O2.tofile(f)
+  with open(indir+'O2n.bin', 'wb') as f:
+      O2.tofile(f)
+else:
+  O2Sat = o2sat(T0, S0)
+  satprofile = [100, 50, 50]
+  zsat = [0, 30, 500]
+  O2z = np.interp(z, zsat, satprofile) * O2Sat
+  O2 = O2 + O2z[:, np.newaxis, np.newaxis]
+
+
 
 fig, ax = plt.subplots()
 ax.plot(O2z, z)
