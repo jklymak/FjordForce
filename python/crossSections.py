@@ -12,7 +12,7 @@ Plot plan view of the numerical setup, largescale
 """
 
 runname = sys.argv[1]
-iternum = np.arange(5, 30) * 3600 * 24
+iternum = np.arange(0, 20) * 3600 * 24
 # iternum = np.arange(3, 13) * 24 * 3600
 try:
     os.mkdir(f'../results/{runname}/slices/')

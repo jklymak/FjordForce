@@ -480,16 +480,17 @@ if not NsqConstant:
 
   O2z = np.interp(z, [0, 25, 120, 150, 1000], [7, 5, 2, 2.7, 2.7]) / 22.4 * 1e3  # umol/kg
   O2 = O2 + O2z[:, np.newaxis, np.newaxis]
-  with open(indir+'O2.bin', 'wb') as f:
-      O2.tofile(f)
-  with open(indir+'O2n.bin', 'wb') as f:
-      O2.tofile(f)
 else:
   O2Sat = o2sat(T0, S0)
   satprofile = [100, 50, 50]
   zsat = [0, 30, 500]
   O2z = np.interp(z, zsat, satprofile) * O2Sat / 100
   O2 = O2 * 0 + O2z[:, np.newaxis, np.newaxis]
+
+with open(indir+'O2.bin', 'wb') as f:
+  O2.tofile(f)
+with open(indir+'O2n.bin', 'wb') as f:
+  O2.tofile(f)
 
 
 

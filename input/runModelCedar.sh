@@ -17,9 +17,9 @@
 # module load netcdf-fortran-mpi/4.5.2
 # module load python/3.9.6
 
-start=1123200
-stop=2073612
-dt=8
+start=0
+stop=1036800
+dt=6
 
 cd ${SLURM_SUBMIT_DIR}
 
