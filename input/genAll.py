@@ -1,6 +1,6 @@
 import gendata
 
-num = 1
+num = 0
 for wind in [30, 20, 15, 10]:
     for NsqFac in [0.5, 1, 2]:
         if ((NsqFac == 1) and (wind == 20)):
