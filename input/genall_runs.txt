@@ -1,0 +1,1 @@
+Bute3d52: wind=30 NsqFac=0.5

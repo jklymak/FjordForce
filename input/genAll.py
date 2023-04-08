@@ -10,7 +10,7 @@ for wind in [30, 20, 15, 10]:
         num += 1
         runnum = 50 + num
         with open('./genall_runs.txt', 'a') as fout:
-            fout.write(f'Bute3d{runnum}: wind={wind} NsqFac={NsqFac}')
+            fout.write(f'Bute3d{runnum}: wind={wind} NsqFac={NsqFac}\n')
         gendata.gendata(runnumber=runnum, wind=wind, NsqFac=NsqFac)
 
 
