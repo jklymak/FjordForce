@@ -13,6 +13,20 @@ import logging
 import pandas as pd
 from replace_data import replace_data
 from local_utils import o2sat
+# import sys
+import argparse
+
+parser = argparse.ArgumentParser()
+
+parser.add_argument('--NsqFac', nargs='?', const=1.0, type=float)
+parser.add_argument('--wind', nargs='?', const='20.0', type=float)
+parser.add_argument('--runnumber', type=int)
+
+args = parser.parse_args()
+
+if not args.runnumber:
+  raise RuntimeError('must specify a runnumber')
+
 
 
 logging.basicConfig(level=logging.INFO)
@@ -21,7 +35,7 @@ _log = logging.getLogger(__name__)
 
 duration = 17
 initial = False
-wind = 20  # m/s *3.6 to get km/h, wind**2 / 1000 to get stress
+wind = args.wind  # m/s *3.6 to get km/h, wind**2 / 1000 to get stress
 uw = wind
 lat = 45
 f0 = 1e-4 * np.sin(lat * np.pi / 180) / np.sin(45 * np.pi / 180)
@@ -31,10 +45,10 @@ NsqConstant = True
 tAlpha = 2.0e-4
 sBeta = 7.4e-4
 # Note this still works
-Nsqfac = 1
+Nsqfac = args.NsqFac
 Nsq0 = Nsq0 * Nsqfac
 
-runname='Bute3d50'
+runname = f'Bute3d{args.runnumber}'
 comments = f"""
 As run 43.  Tau={wind**2*1e-3} N/m^2 ({wind} m/s)
 Lat = {lat}; f={f0:1.3e}
