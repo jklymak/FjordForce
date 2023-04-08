@@ -4,3 +4,4 @@ Bute3d53: wind=30 NsqFac=2
 Bute3d54: wind=20 NsqFac=0.5
 Bute3d55: wind=20 NsqFac=2
 Bute3d56: wind=15 NsqFac=0.5
+Bute3d57: wind=15 NsqFac=1
