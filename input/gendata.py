@@ -16,7 +16,7 @@ from local_utils import o2sat
 # import sys
 import argparse
 
-def gendata(runnumber, NsqFac=1.0, wind=20.0, windL=60e3, fjordL=180e3):
+def gendata(runnumber, NsqFac=1.0, wind=20.0, windL=60e3, fjordL=180e3, fjordW=3e3):
 
   logging.basicConfig(level=logging.INFO)
 
@@ -245,7 +245,7 @@ def gendata(runnumber, NsqFac=1.0, wind=20.0, windL=60e3, fjordL=180e3):
   #  wavybot = 0 * wavytop
 
   for ind in range(nx):
-    topshape = [1.5, 1.5, y[-1]/1000, y[-1]/1000]
+    topshape = [fjordW/2 / 1e3, fjordW/2 / 1e3, y[-1]/1000, y[-1]/1000]  # in km
     xtop = [0, fjordL, fjordL+40e3, 10000e3]
     top = np.interp(x[ind], xtop, topshape)
 
@@ -425,10 +425,15 @@ def gendata(runnumber, NsqFac=1.0, wind=20.0, windL=60e3, fjordL=180e3):
   taux = 0.5 - np.tanh((x-windL)/(windL / 2))/2
 
   taux = np.broadcast_to(taux[np.newaxis, :], (ny, nx))
+  tt = taux.copy()
+  # set tau =0 outside width of fjord (to stop whole basin from getting a wind.)
+  for yind in range(ny):
+    if np.abs(y[yind])>fjordW:
+      tt[yind, :] = 0.0
 
   if True:
     print(taux)
-    tau = taut[:, np.newaxis, np.newaxis] * taux[np.newaxis, ...]
+    tau = taut[:, np.newaxis, np.newaxis] * tt[np.newaxis, ...]
     print(np.shape(tau))
     fig, ax = plt.subplots(2, 1)
     pc = ax[0].pcolormesh(x, t,  tau[:, 2, :], rasterized=True, vmin=-taumax, vmax=taumax, cmap='RdBu_r')
