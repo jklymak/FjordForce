@@ -16,7 +16,7 @@ from local_utils import o2sat
 # import sys
 import argparse
 
-def gendata(runnumber, NsqFac=1.0, wind=20.0, windL=60e3):
+def gendata(runnumber, NsqFac=1.0, wind=20.0, windL=60e3, fjordL=180e3):
 
   logging.basicConfig(level=logging.INFO)
 
@@ -246,7 +246,7 @@ def gendata(runnumber, NsqFac=1.0, wind=20.0, windL=60e3):
 
   for ind in range(nx):
     topshape = [1.5, 1.5, y[-1]/1000, y[-1]/1000]
-    xtop = [0, 180e3, 220e3, 10000e3]
+    xtop = [0, fjordL, fjordL+40e3, 10000e3]
     top = np.interp(x[ind], xtop, topshape)
 
     yd = np.array([-top + wavybot[ind], -top + wavybot[ind]+0.5,
@@ -540,6 +540,7 @@ if __name__ == "__main__":
   parser.add_argument('--wind', nargs='?', const='20.0', type=float)
   parser.add_argument('--runnumber', type=int)
   parser.add_argument('--windL', nargs='?', const='60.0e3', type=float)
+  parser.add_argument('--fjordL', nargs='?', const='180.0e3', type=float)
 
   args = parser.parse_args()
 
