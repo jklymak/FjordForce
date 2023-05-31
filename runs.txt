@@ -219,7 +219,13 @@ Bute3d72: python gendata.py --runnumber=72 --wind=20.0 --NsqFac=1.0 --windL=1e8
    meant to be wind all the way through fjord.  Turned off in basin
    3212613
 Bute3d73: python gendata.py --runnumber=72 --wind=20.0 --NsqFac=1.0 --windL=1e8 --fjordL=100e3
-   meant to be wind all the way through fjord.  Turned off in basin
-   3212613
+   Shorter physical fjord
+   3212903
+Bute3d74:  python gendata.py --runnumber=74 --wind=20.0 --NsqFac=1.0 --windL=1e8 --fjordL=60e3
+   Shorter again.
+Bute3d75: python gendata.py --runnumber=75 --wind=20.0 --NsqFac=1.0 --windL=1e8 --fjordL=250e3
+   Longer than default
+
+
 
 
