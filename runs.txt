@@ -213,4 +213,5 @@ Bute3d59: wind=10 NsqFac=0.5
 Bute3d60: wind=10 NsqFac=1
 Bute3d61: wind=10 NsqFac=2
 
+Bute3d70: wind=20 NsqFac=1 windL=120e3
 
