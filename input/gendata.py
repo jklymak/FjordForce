@@ -428,8 +428,13 @@ def gendata(runnumber, NsqFac=1.0, wind=20.0, windL=60e3, fjordL=180e3, fjordW=3
   tt = taux.copy()
   # set tau =0 outside width of fjord (to stop whole basin from getting a wind.)
   for yind in range(ny):
-    if np.abs(y[yind])>fjordW:
+    if np.abs(y[yind])>fjordW+2000:
       tt[yind, :] = 0.0
+  # zero outside of fjordL:
+  for xind in range(nx):
+    if np.abs(x[xind])>fjordL+2000:
+      tt[:, xind] = 0.0
+
 
   if True:
     print(taux)
