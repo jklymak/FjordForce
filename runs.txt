@@ -215,7 +215,7 @@ Bute3d61: wind=10 NsqFac=2
 
 Bute3d70: wind=20 NsqFac=1 windL=120e3  job: 3177501
 Bute3d71: wind=20 NsqFac=1 windL=180e3  job: 3164678
-Bute3d72: python gendata.py --runnumber=72 --wind=20.0 --NsqFac=1.0 --windL=1e8
+Bute3d72: python gendata.py --runnumber=72 --wind=20.0 --NsqFac=1.0 --windL=200e3
    meant to be wind all the way across.
    3210960
 
