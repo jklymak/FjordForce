@@ -256,7 +256,7 @@ def gendata(runnumber, NsqFac=1.0, wind=20.0, windL=60e3, fjordL=180e3, fjordW=3
     d[:, ind] = d[:, ind] * y0
 
   print(np.shape(x))
-  indx = np.nonzero(x > 200e3)[0]
+  indx = np.nonzero(x > fjordL+50e3)[0]
   print(np.shape(indx))
   d[:, indx] += np.random.rand(ny, len(indx)) * 20
   d[d>0] = 0
@@ -557,5 +557,5 @@ if __name__ == "__main__":
   if not args.runnumber:
     raise RuntimeError('must specify a runnumber')
 
-  gendata(args.runnumber, NsqFac=args.NsqFac, wind=args.wind, windL=args.windL)
+  gendata(args.runnumber, NsqFac=args.NsqFac, wind=args.wind, windL=args.windL, fjordL=args.fjordL)
 
