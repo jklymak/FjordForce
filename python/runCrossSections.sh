@@ -17,5 +17,5 @@ source /home/jklymak/venvs/butewind/bin/activate
 
 printf "done activate"
 echo `which python`
-python crossSections.py ${top}
+python ../python/crossSections.py ${top}
 

@@ -16,7 +16,7 @@ from local_utils import o2sat
 # import sys
 import argparse
 
-def gendata(runnumber, NsqFac=1.0, wind=20.0):
+def gendata(runnumber, NsqFac=1.0, wind=20.0, windL=60e3):
 
   logging.basicConfig(level=logging.INFO)
 
@@ -33,6 +33,7 @@ def gendata(runnumber, NsqFac=1.0, wind=20.0):
   NsqConstant = True
   tAlpha = 2.0e-4
   sBeta = 7.4e-4
+
   # Note this still works
   Nsq0 = Nsq0 * NsqFac
 
@@ -44,6 +45,7 @@ def gendata(runnumber, NsqFac=1.0, wind=20.0):
   advschemes = 77 for both salt and temp
   Constant Nsq, Temperature passive, but set to something that will
   have reasonable flux.  Can't vary in space!  8.9 degrees C about right.
+
   """
 
   outdir0='../results/'+runname+'/'
@@ -420,7 +422,7 @@ def gendata(runnumber, NsqFac=1.0, wind=20.0):
     taut = taut * 0 + taumax
 
   taux = np.exp(-x/30000)
-  taux = 0.5 - np.tanh((x-60e3)/30e3)/2
+  taux = 0.5 - np.tanh((x-windL)/(windL / 2))/2
 
   taux = np.broadcast_to(taux[np.newaxis, :], (ny, nx))
 
@@ -537,11 +539,12 @@ if __name__ == "__main__":
   parser.add_argument('--NsqFac', nargs='?', const=1.0, type=float)
   parser.add_argument('--wind', nargs='?', const='20.0', type=float)
   parser.add_argument('--runnumber', type=int)
+  parser.add_argument('--windL', nargs='?', const='60.0e3', type=float)
 
   args = parser.parse_args()
 
   if not args.runnumber:
     raise RuntimeError('must specify a runnumber')
 
-  gendata(args.runnumber, NsqFac=args.NsqFac, wind=args.wind)
+  gendata(args.runnumber, NsqFac=args.NsqFac, wind=args.wind, windL=args.windL)
 
