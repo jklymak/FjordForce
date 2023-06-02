@@ -17,5 +17,5 @@ source /home/jklymak/venvs/butewind/bin/activate
 
 printf "done activate"
 echo `which python`
-python getSurfaceDensity.py ${top}
+python ../python/getSurfaceDensity.py ${top}
 
