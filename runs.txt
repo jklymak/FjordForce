@@ -199,6 +199,7 @@ Bute3d43 58741920
 Bute3d43Stop5d 60172281
 - as above, but with wind turned off after day 5
 
+# Below, the actual Nsq Fac was applied twice, so 1/4, 1, 4!!!
 
 Bute3d51: wind=30 NsqFac=0.5
 Bute3d52: wind=30 NsqFac=1
@@ -228,6 +229,10 @@ Bute3d74:  python gendata.py --runnumber=74 --wind=20.0 --NsqFac=1.0 --windL=1e8
 Bute3d75: python gendata.py --runnumber=75 --wind=20.0 --NsqFac=1.0 --windL=1e8 --fjordL=250e3
    Longer than default
    3212943
+python gendata.py --runnumber=76 --wind=10.0 --NsqFac=1.0 --windL=1e8 --fjordL=100e3
+python gendata.py --runnumber=77 --wind=10.0 --NsqFac=1.0 --windL=1e8 --fjordL=60e3
+python gendata.py --runnumber=78 --wind=20.0 --NsqFac=0.5 --windL=1e8 --fjordL=100e3
+python gendata.py --runnumber=79 --wind=20.0 --NsqFac=0.5 --windL=1e8 --fjordL=60e3
 
 
 
