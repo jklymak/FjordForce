@@ -16,7 +16,7 @@ from local_utils import o2sat
 # import sys
 import argparse
 
-def gendata(runnumber, NsqFac=1.0, wind=20.0, windL=60e3, fjordL=180e3, fjordW=3e3):
+def gendata(runnumber, NsqFac=1.0, wind=20.0, windL=60e3, fjordL=180e3, fjordW=3e3, fjordD=200):
 
   logging.basicConfig(level=logging.INFO)
 
@@ -206,8 +206,8 @@ def gendata(runnumber, NsqFac=1.0, wind=20.0, windL=60e3, fjordL=180e3, fjordW=3
 
   ######## Bathy ############
   # get the topo:
-  xd = np.array([0, 3, 10000])
-  dd = np.array([0, 200, 200])
+  xd = np.array([0, 3, 300, 10000])
+  dd = np.array([0, fjordD, fjordD, 200])
   d = np.zeros((ny,nx))
   d0 = np.interp(x, xd*1000, -dd)
   d = d + d0
@@ -551,11 +551,12 @@ if __name__ == "__main__":
   parser.add_argument('--runnumber', type=int)
   parser.add_argument('--windL', nargs='?', const='60.0e3', type=float)
   parser.add_argument('--fjordL', nargs='?', const='180.0e3', type=float)
+  parser.add_argument('--fjordD', nargs='?', const='200', type=float)
 
   args = parser.parse_args()
 
   if not args.runnumber:
     raise RuntimeError('must specify a runnumber')
 
-  gendata(args.runnumber, NsqFac=args.NsqFac, wind=args.wind, windL=args.windL, fjordL=args.fjordL)
+  gendata(args.runnumber, NsqFac=args.NsqFac, wind=args.wind, windL=args.windL, fjordL=args.fjordL, fjordD=args.fjordD)
 

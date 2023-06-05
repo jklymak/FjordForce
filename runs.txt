@@ -214,6 +214,7 @@ Bute3d59: wind=10 NsqFac=0.5
 Bute3d60: wind=10 NsqFac=1
 Bute3d61: wind=10 NsqFac=2
 
+# These are all done:
 Bute3d70: wind=20 NsqFac=1 windL=120e3  job: 3177501  Done
 Bute3d71: wind=20 NsqFac=1 windL=180e3  job: 3164678  Done
 Bute3d72: python gendata.py --runnumber=72 --wind=20.0 --NsqFac=1.0 --windL=1e8
@@ -229,10 +230,14 @@ Bute3d74:  python gendata.py --runnumber=74 --wind=20.0 --NsqFac=1.0 --windL=1e8
 Bute3d75: python gendata.py --runnumber=75 --wind=20.0 --NsqFac=1.0 --windL=1e8 --fjordL=250e3
    Longer than default
    3212943
+
+## Starting now:  Done
 python gendata.py --runnumber=76 --wind=10.0 --NsqFac=1.0 --windL=1e8 --fjordL=100e3
 python gendata.py --runnumber=77 --wind=10.0 --NsqFac=1.0 --windL=1e8 --fjordL=60e3
 python gendata.py --runnumber=78 --wind=20.0 --NsqFac=0.5 --windL=1e8 --fjordL=100e3
 python gendata.py --runnumber=79 --wind=20.0 --NsqFac=0.5 --windL=1e8 --fjordL=60e3
+
+## OK, now test H dependence.  Only thing not tested...
 
 
 
