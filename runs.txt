@@ -239,6 +239,11 @@ python gendata.py --runnumber=79 --wind=20.0 --NsqFac=0.5 --windL=1e8 --fjordL=6
 
 ## OK, now test H dependence.  Only thing not tested...
 
+python gendata.py --runnumber=80 --wind=20.0 --NsqFac=1 --windL=1e8 --fjordL=100e3 --fjordD=100
+python gendata.py --runnumber=81 --wind=20.0 --NsqFac=1 --windL=1e8 --fjordL=100e3 --fjordD=150
+python gendata.py --runnumber=82 --wind=20.0 --NsqFac=0.5 --windL=1e8 --fjordL=100e3 --fjordD=100
+python gendata.py --runnumber=83 --wind=20.0 --NsqFac=0.5 --windL=1e8 --fjordL=100e3 --fjordD=150
+
 
 
 
