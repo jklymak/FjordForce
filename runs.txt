@@ -237,12 +237,18 @@ python gendata.py --runnumber=77 --wind=10.0 --NsqFac=1.0 --windL=1e8 --fjordL=6
 python gendata.py --runnumber=78 --wind=20.0 --NsqFac=0.5 --windL=1e8 --fjordL=100e3
 python gendata.py --runnumber=79 --wind=20.0 --NsqFac=0.5 --windL=1e8 --fjordL=60e3
 
-## OK, now test H dependence.  Only thing not tested...
+## OK, now test H dependence.  Only thing not tested...  Queued...
 
 python gendata.py --runnumber=80 --wind=20.0 --NsqFac=1 --windL=1e8 --fjordL=100e3 --fjordD=100
 python gendata.py --runnumber=81 --wind=20.0 --NsqFac=1 --windL=1e8 --fjordL=100e3 --fjordD=150
+# these two hit the seafloor so not very useful.
 python gendata.py --runnumber=82 --wind=20.0 --NsqFac=0.5 --windL=1e8 --fjordL=100e3 --fjordD=100
 python gendata.py --runnumber=83 --wind=20.0 --NsqFac=0.5 --windL=1e8 --fjordL=100e3 --fjordD=150
+
+python gendata.py --runnumber=84 --wind=20.0 --NsqFac=2 --windL=1e8 --fjordL=100e3 --fjordD=100
+python gendata.py --runnumber=85 --wind=20.0 --NsqFac=2 --windL=1e8 --fjordL=100e3 --fjordD=150
+python gendata.py --runnumber=86 --wind=10.0 --NsqFac=1 --windL=1e8 --fjordL=100e3 --fjordD=100
+python gendata.py --runnumber=87 --wind=10.0 --NsqFac=1 --windL=1e8 --fjordL=100e3 --fjordD=150
 
 
 

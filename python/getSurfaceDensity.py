@@ -31,10 +31,14 @@ iters = np.arange(0, lasttime, 3600, dtype='int')
 with xmitgcm.open_mdsdataset(f'../results/{runname}/input/', endian='<',
                              iters=iters, prefix=['spinup', 'spinup2d']) as ds:
     ds['pden'] = ds.THETA * -0.0 + ds.SALT * 0.75
+
     pden0 = ds.pden.isel(time=0, XC=100, YC=120)
+    z = pden0.Z.values
+    z = z[pden0>0]
+    pden0 = pden0[pden0>0].values
+    print(pden0)
     ts = xr.Dataset(coords={'time':ds.time})
     ts['maxden'] = ('time', ds.pden.sel(Z=-3.75, XC=slice(0, 50e3)).max(dim=['YC', 'XC']).data)
-    z = ds.Z.values
     dendepth = np. interp(ts.maxden.values, pden0, z)
     ts['dendepth'] = ('time', dendepth)
     ts.to_netcdf(f'MaxDen{runname}.nc')
