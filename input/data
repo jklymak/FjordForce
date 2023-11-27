@@ -24,7 +24,7 @@
  sBeta =7.4E-4,
  gravity=9.81,
  implicitFreeSurface=.TRUE.,
-# nonlinFreeSurf=4,
+ nonlinFreeSurf=0,
  exactConserv=.FALSE.
  rigidLid=.FALSE.
  nonHydrostatic=.FALSE.,
