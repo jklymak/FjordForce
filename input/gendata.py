@@ -306,7 +306,11 @@ with open(indir+'atmosphere.bin', 'wb') as f:
 
 
 ###################################
-# RBCS sponge
+# RBCS sponges
+# We are doing this every 1860 s for 44640 s
+
+t = np.arange(0, 44640, 1860)
+nt = len(t)
 weight = np.zeros((nz, ny, nx))
 weight[..., -100:] = np.linspace(0, 1, 100)**1.5
 # print(weight)
@@ -315,9 +319,17 @@ with open(indir+'spongeweight.bin', 'wb') as f:
 
 # force to zero velocity to prevent reflections.
 # note that we also force T and S to Tinit and Sinit
-weight = np.zeros((nz, ny, nx))
+weight = np.zeros((nt, nz, ny, nx))
 with open(indir+'Uforce.bin', 'wb') as f:
     weight.tofile(f)
+weight = np.zeros((nt, nz, ny, nx)) + S0[np.newaxis, :, np.newaxis, :]
+with open(indir+'Sforce.bin', 'wb') as f:
+    weight.tofile(f)
+weight = np.zeros((nt, nz, ny, nx)) + T0[np.newaxis, :, np.newaxis, :]
+with open(indir+'Tforce.bin', 'wb') as f:
+    weight.tofile(f)
+
+
 
 #### Initial O2
 

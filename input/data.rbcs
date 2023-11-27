@@ -31,9 +31,9 @@
 #------------------------------------------------------------------------------
 # files containing relaxation flds  have explicit name
 #------------------------------------------------------------------------------
-   relaxTFile='../indata/TInit.bin',
+   relaxTFile='../indata/Tforce.bin',
    relaxUFile='../indata/Uforce.bin',
-   relaxSFile='../indata/SInit.bin',
+   relaxSFile='../indata/Sforce.bin',
    relaxEtaFile='../indata/EtaForce.bin',
 #   relaxVFile='Vforce.bin',
 #------------------------------------------------------------------------------
