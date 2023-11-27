@@ -316,10 +316,19 @@ weight[..., -100:] = np.linspace(0, 1, 100)**1.5
 # print(weight)
 with open(indir+'spongeweight.bin', 'wb') as f:
     weight.tofile(f)
-
 fig, ax = plt.subplots()
+
 ax.plot(x, weight[0, 0, :])
+
+
+weight = np.zeros((ny, nx))
+weight[..., -120:] = np.linspace(0, 1, 120)**1.5
+with open(indir+'etaweight.bin', 'wb') as f:
+    weight.tofile(f)
+
+ax.plot(x, weight[0, :])
 fig.savefig(outdir+'/figs/weight.png')
+
 
 # force to zero velocity to prevent reflections.
 # note that we also force T and S to Tinit and Sinit
