@@ -93,6 +93,6 @@
  bathyFile='../indata/topog.bin',
 # zonalWindFile='../indata/taux.bin',
 # meridWindFile=,
- pLoadFile='../indata/atmosphere.bin',
- surfQnetFile=  '../indata/Qnet.bin',
+# pLoadFile='../indata/atmosphere.bin',
+# surfQnetFile=  '../indata/Qnet.bin',
  /
