@@ -16,8 +16,8 @@ logging.basicConfig(level=logging.DEBUG)
 
 _log = logging.getLogger(__name__)
 
-runname='Fjord2'
-comments = """Lower res (dx=100, nz=20) Atmopsheric Load"""
+runname='Fjord3'
+comments = """Lower res (dx=100, nz=20) Atmopsheric Load; linear free surface?"""
 
 outdir0='../results/'+runname+'/'
 
