@@ -24,7 +24,7 @@
  sBeta =7.4E-4,
  gravity=9.81,
  implicitFreeSurface=.TRUE.,
- #nonlinFreeSurf=4,
+# nonlinFreeSurf=4,
  exactConserv=.FALSE.
  rigidLid=.FALSE.
  nonHydrostatic=.FALSE.,
@@ -93,6 +93,6 @@
  bathyFile='../indata/topog.bin',
 # zonalWindFile='../indata/taux.bin',
 # meridWindFile=,
-# pLoadFile='../indata/atmosphere.bin',
+ pLoadFile='../indata/atmosphere.bin',
 # surfQnetFile=  '../indata/Qnet.bin',
  /
