@@ -293,7 +293,7 @@ if False:
 
 
 amp = 1   # m
-om = np.pi * 2 / 12.4 / 3600
+om = np.pi * 2 / 12.4  # rad/h
 
 tidet = amp * np.sin( om * t ) * 9.81 * 1000  # kg m^-1 s^-2
 
