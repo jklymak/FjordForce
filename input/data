@@ -4,7 +4,7 @@
 #
 # Continuous equation parameters
  &PARM01
- debuglevel=1,
+ debuglevel=3,
  tRefFile='../indata/TRef.bin',
  sRefFile='../indata/SRef.bin',
  viscAz=1.E-5,
@@ -17,29 +17,24 @@
  diffKzS=1.E-5,
  implicitDiffusion=.TRUE.,
  implicitViscosity=.TRUE.,
- f0=1.000e-04,
+ f0=0.E-4,
  beta=0.E-11,
  eosType='LINEAR',
- tAlpha=2.000e-04,
+ tAlpha=2.E-4,
  sBeta =7.4E-4,
  gravity=9.81,
  implicitFreeSurface=.TRUE.,
  exactConserv=.FALSE.
  rigidLid=.FALSE.
- nonHydrostatic=.FALSE.,
+ nonHydrostatic=.TRUE.,
  hFacMin=0.1,
- bottomDragQuadratic=2.E-3,
-# viscC2Leith = 1e-3
-# viscC2LeithD = 1e-3
-tempAdvScheme=77,
-saltAdvScheme=77,
+# tempAdvScheme=77,
 # implicSurfPress=0.5,
 # implicDiv2DFlow=0.5,
 # nonlinFreeSurf=3,
 # hFacInf=0.2,
 # hFacSup=1.8,
  saltStepping=.TRUE.,
- tempStepping=.TRUE.,
  staggerTimeStep=.TRUE.,
 #- not safe to use globalFiles in multi-processors runs
 #globalFiles=.TRUE.,
@@ -59,10 +54,11 @@ saltAdvScheme=77,
 
 # Time stepping parameters
  &PARM03
- startTime=0,
+ nIter0=0,
 # nTimeSteps=480,
- endTime=1036800,
- deltaT=6.0,
+ endTime=1468800,
+# endTime=10800,
+ deltaT=3.0,
  abEps=0.1,
  pChkptFreq=43200.0,
  chkptFreq=0.,
@@ -72,10 +68,10 @@ saltAdvScheme=77,
  monitorSelect=2,
  rwSuffixType=2,
  periodicExternalForcing=.TRUE.,
-# 24 days
- externForcingCycle=2073600,
-# 1 day
- externForcingPeriod=86400,
+# 14 days
+ externForcingCycle=1468800,
+# 1 hour
+ externForcingPeriod=3600
 /
 
 # Gridding parameters
@@ -94,7 +90,7 @@ saltAdvScheme=77,
 # vVelInitFile='../indata/V.init',
 # pSurfInitFile='../indata/Eta.init',
  bathyFile='../indata/topog.bin',
-# meridWindFile=,
-# surfQnetFile=  '../indata/Qnet.bin',
  zonalWindFile='../indata/taux.bin',
+ meridWindFile=,
+ surfQnetFile=  '../indata/Qnet.bin',
  /

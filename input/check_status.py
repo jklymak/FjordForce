@@ -11,7 +11,7 @@ import subprocess
 print(sys.argv)
 dd = sys.argv[1]
 
-os.system(f"grep -E 'advcfl_wvel_max|advcfl_vvel_max|advcfl_uvel_max|time_seconds|dynstat_uvel_max' ../results/{dd}/input/STDOUT.0000 | tail -n 9")
+os.system(f"grep -E 'advcfl_wvel_max|advcfl_uvel_max|time_seconds|dynstat_uvel_max' ../results/{dd}/input/STDOUT.0000 | tail -n 9")
 ot = subprocess.check_output(f"grep -E 'time_seconds' ../results/{dd}/input/STDOUT.0000 | tail -n 1",
         shell=True, text=True)
 
