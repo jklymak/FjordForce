@@ -16,8 +16,8 @@ logging.basicConfig(level=logging.DEBUG)
 
 _log = logging.getLogger(__name__)
 
-runname='Fjord1'
-comments = """Lower res (dx=100, nz=20) Nonlinear Surf"""
+runname='Fjord2'
+comments = """Lower res (dx=100, nz=20) Atmopsheric Load"""
 
 outdir0='../results/'+runname+'/'
 
@@ -253,39 +253,57 @@ S0 = S0[:, np.newaxis] * (x[np.newaxis, :] * 0 + 1)
 with open(indir+"/SInit.bin", "wb") as f:
 	S0.tofile(f)
 
-############################
-# external wind stress
+## Make timeseries
 nt = 17 * 24
-Cd = 1e-3
-uw = 15  # m/s
-taumax = Cd * uw**2  # N/m^2
 t = np.arange(nt*1.0)  # hours
-taut = 0 * t
-taut[t<=24] = np.arange(25) / 24 * taumax
-taut[(t>24) & (t<(6*24))] = taumax
-taut[(t>=6*24) & (t<7*24)] = np.arange(23, -1, -1) / 24 * taumax
 
-taux = np.exp(-x/30000)
-taux = 0.5-np.tanh((x-60e3)/30e3)/2
+if False:
 
-print(taux)
-tau = taut[np.newaxis, :] * taux[:, np.newaxis]
-print(np.shape(tau))
-fig, ax = plt.subplots()
-ax.pcolormesh(x, t,  tau.T, rasterized=True, vmin=-taumax, vmax=taumax, cmap='RdBu_r')
-fig.savefig(outdir+'/figs/Tau.png')
+  ############################
+  # external wind stress
+  Cd = 1e-3
+  uw = 15  # m/s
+  taumax = Cd * uw**2  # N/m^2
+  taut = 0 * t
+  taut[t<=24] = np.arange(25) / 24 * taumax
+  taut[(t>24) & (t<(6*24))] = taumax
+  taut[(t>=6*24) & (t<7*24)] = np.arange(23, -1, -1) / 24 * taumax
 
-with open(indir+'taux.bin', 'wb') as f:
-    tau.T.tofile(f)
+  taux = np.exp(-x/30000)
+  taux = 0.5-np.tanh((x-60e3)/30e3)/2
 
-################################
-# external heat flux
-Qnetmax = 500
-Qt = taut / taumax * Qnetmax
+  print(taux)
+  tau = taut[np.newaxis, :] * taux[:, np.newaxis]
+  print(np.shape(tau))
+  fig, ax = plt.subplots()
+  ax.pcolormesh(x, t,  tau.T, rasterized=True, vmin=-taumax, vmax=taumax, cmap='RdBu_r')
+  fig.savefig(outdir+'/figs/Tau.png')
 
-Q = Qt[np.newaxis, :] * taux[:, np.newaxis]
-with open(indir+'Qnet.bin', 'wb') as f:
-    Q.T.tofile(f)
+  with open(indir+'taux.bin', 'wb') as f:
+      tau.T.tofile(f)
+
+  ################################
+  # external heat flux
+  Qnetmax = 500
+  Qt = taut / taumax * Qnetmax
+
+  Q = Qt[np.newaxis, :] * taux[:, np.newaxis]
+  with open(indir+'Qnet.bin', 'wb') as f:
+      Q.T.tofile(f)
+
+
+amp = 1   # m
+om = np.pi * 2 / 12.4 / 3600
+
+tidet = amp * np.sin( om * t ) * 9.81  # m^2 / s^2
+
+tidex = np.zeros(nx)
+tidex[x>=120] = 1.0  # I don't think there is any reason to be gentle for this forcing...
+
+tide = tidet[np.newaxis, :] * tidex[:, np.newaxis]
+with open(indir+'atmosphere.bin', 'wb') as f:
+    tide.T.tofile(f)
+
 
 ###################################
 # RBCS sponge
