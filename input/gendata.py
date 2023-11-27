@@ -343,7 +343,7 @@ with open(indir+'Tforce.bin', 'wb') as f:
     weight.tofile(f)
 # seasurface height forcing.  tidal!
 
-amp = 1   # m
+amp = 0   # m
 om = np.pi * 2 / 12.4 / 3600 # rad/s
 
 weight = np.zeros((nt, ny, nx)) + (amp*np.cos(om * t))[:, np.newaxis, np.newaxis]
