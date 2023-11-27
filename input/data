@@ -26,7 +26,7 @@
  implicitFreeSurface=.TRUE.,
  exactConserv=.FALSE.
  rigidLid=.FALSE.
- nonHydrostatic=.TRUE.,
+ nonHydrostatic=.FALSE.,
  hFacMin=0.1,
 # tempAdvScheme=77,
 # implicSurfPress=0.5,

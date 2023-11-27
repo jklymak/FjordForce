@@ -16,22 +16,21 @@ logging.basicConfig(level=logging.DEBUG)
 
 _log = logging.getLogger(__name__)
 
-runname='Bute15'
-comments = """Higher res (dx=25, nz=200) observed TS to 230 m; Qnet=500,
-uw=15 m/s, Non hydrostatic!!, KL10 off, Kh = 4e-4, O2 with airsea flux; """
+runname='Fjord0'
+comments = """Lower res (dx=100, nz=20)"""
 
 outdir0='../results/'+runname+'/'
 
 indir =outdir0+'/indata/'
 
-dx0=100. / 4.
+dx0=100.
 dy0=100.
 
 
 # model size
-nx = 48 * 104
+nx = 6 * 200
 ny = 1
-nz = 200
+nz = 20
 
 _log.info('nx %d ny %d', nx, ny)
 
@@ -190,8 +189,8 @@ fig.savefig(outdir+'/figs/topo.png')
 ##################
 # dz:
 # dz is from the surface down (right?).  Its saved as positive.
-dz = np.ones(nz)
-for i in range(115, nz):
+dz = np.ones(nz) * 10
+for i in range(15, nz):
     dz[i] = dz[i-1] * 1.03
 
 with open(indir+"/delZ.bin", "wb") as f:
@@ -241,7 +240,7 @@ S0 =  30.6 - 15*np.exp(-z / 20)
 S0 = np.interp(z, zs, s)
 
 S0[z<220] = np.interp(z[z<220], df.Depth, df.Salinity)
-S0[z>=220] = S0[z>=220] - S0[z>=220][0] + S0[z<220][-1]
+# S0[z>=220] = S0[z>=220] - S0[z>=220][0] + S0[z<220][-1]
 with open(indir+"/SRef.bin", "wb") as f:
 	S0.tofile(f)
 plt.clf()
