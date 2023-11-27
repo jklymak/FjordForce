@@ -189,7 +189,7 @@ fig.savefig(outdir+'/figs/topo.png')
 ##################
 # dz:
 # dz is from the surface down (right?).  Its saved as positive.
-dz = np.ones(nz) * 10
+dz = np.ones(nz) * 25
 for i in range(15, nz):
     dz[i] = dz[i-1] * 1.03
 
@@ -240,7 +240,7 @@ S0 =  30.6 - 15*np.exp(-z / 20)
 S0 = np.interp(z, zs, s)
 
 S0[z<220] = np.interp(z[z<220], df.Depth, df.Salinity)
-# S0[z>=220] = S0[z>=220] - S0[z>=220][0] + S0[z<220][-1]
+S0[z>=220] = S0[z>=220] - S0[z>=220][0] + S0[z<220][-1]
 with open(indir+"/SRef.bin", "wb") as f:
 	S0.tofile(f)
 plt.clf()

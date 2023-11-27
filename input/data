@@ -4,7 +4,7 @@
 #
 # Continuous equation parameters
  &PARM01
- debuglevel=3,
+ debuglevel=1,
  tRefFile='../indata/TRef.bin',
  sRefFile='../indata/SRef.bin',
  viscAz=1.E-5,
@@ -59,7 +59,7 @@
 # nTimeSteps=480,
  endTime=178560,
 # endTime=10800,
- deltaT=3.0,
+ deltaT=20.0,
  abEps=0.1,
  pChkptFreq=43200.0,
  chkptFreq=0.,
