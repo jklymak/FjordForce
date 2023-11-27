@@ -7,6 +7,7 @@
    useRBCvVel=.FALSE.,
    useRBCuVel=.TRUE.,
    useRBCsalt=.TRUE.,
+   useRBCeta=.TRUE.,
 #------------------------------------------------------------------------------
 #- relaxation times
 # This is the timescale where "sponge=1".
@@ -15,6 +16,7 @@
     tauRelaxV=43200.,
     tauRelaxT=43200.,
     tauRelaxS=43200.,
+    tauRelaxEta=1800.,
 #------------------------------------------------------------------------------
 # masks - #1 and #2 = T,S , #3 = tracers ;
 # masks  U,V have explicit name - if left out then TMask = used
@@ -22,6 +24,7 @@
 # Probably need different U and V masks because they are on a slightly different
 # grid
    relaxMaskFile='../indata/spongeweight.bin',
+   relaxMaskEtaFile='../indata/etaweight.bin',
 #   relaxMaskUFile='usponge.bin',
 #   relaxMaskVFile='vsponge.bin',
 
@@ -31,12 +34,13 @@
    relaxTFile='../indata/TInit.bin',
    relaxUFile='../indata/Uforce.bin',
    relaxSFile='../indata/SInit.bin',
+   relaxEtaFile='../indata/EtaForce.bin',
 #   relaxVFile='Vforce.bin',
 #------------------------------------------------------------------------------
 #   rbcsIniter=0,
 # 1/24 tidal cycle
-#   rbcsForcingPeriod=1860.,
-#   rbcsForcingCycle=44640.,
+rbcsForcingPeriod=1860.,
+rbcsForcingCycle=44640.,
  /
 &RBCS_PARM02
  useRBCptrnum(1)=.FALSE.,
