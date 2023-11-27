@@ -25,7 +25,7 @@
  gravity=9.81,
  implicitFreeSurface=.FALSE.,
  nonlinFreeSurf=4,
- exactConserv=.FALSE.
+ exactConserv=.TRUE.
  rigidLid=.FALSE.
  nonHydrostatic=.FALSE.,
  hFacMin=0.1,
