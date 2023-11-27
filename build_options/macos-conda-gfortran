@@ -1,15 +1,15 @@
 #!/bin/bash
 #
 
-CPP='/usr/local/bin/cpp-11 -traditional -P'
+CPP='/opt/homebrew/bin/cpp-13 -traditional -P'
 FC=mpif90
 CC=mpicc
 LINK=$FC
 NOOPTFLAGS='-O0'
 MAKEDEPEND='makedepend'
 DEFINES='-DWORDLENGTH=4 -DALWAYS_USE_MPI -DALLOW_USE_MPI'
-INCLUDES='-I/usr/local/include'
-LIBX='-I/usr/local/lib'
+INCLUDES='-I/opt/homebrew/include'
+LIBX='-I/opt/homebrew/lib'
 #LIBS='-lSystem libquadmath.0.dylib'
 
 #  For IEEE, use the "-ffloat-store" option
