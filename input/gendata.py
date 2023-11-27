@@ -322,7 +322,7 @@ ax.plot(x, weight[0, 0, :])
 
 
 weight = np.zeros((ny, nx))
-weight[..., -120:] = np.linspace(0, 1, 120)**1.5
+weight[..., -130:] = np.linspace(0, 1, 130)**1.5
 with open(indir+'etaweight.bin', 'wb') as f:
     weight.tofile(f)
 
