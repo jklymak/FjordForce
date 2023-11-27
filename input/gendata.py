@@ -341,6 +341,13 @@ with open(indir+'Sforce.bin', 'wb') as f:
 weight = np.zeros((nt, nz, ny, nx)) + T0[np.newaxis, :, np.newaxis, :]
 with open(indir+'Tforce.bin', 'wb') as f:
     weight.tofile(f)
+# seasurface height forcing.  tidal!
+amp = 1   # m
+om = np.pi * 2 / 12.4 / 3600 # rad/s
+
+weight = np.zeros((nt, ny, nx)) + (amp*np.cos(om * t))[:, np.newaxis, np.newaxis]
+with open(indir+'Etaforce.bin', 'wb') as f:
+    weight.tofile(f)
 
 
 

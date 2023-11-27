@@ -34,7 +34,7 @@
    relaxTFile='../indata/Tforce.bin',
    relaxUFile='../indata/Uforce.bin',
    relaxSFile='../indata/Sforce.bin',
-   relaxEtaFile='../indata/EtaForce.bin',
+   relaxEtaFile='../indata/Etaforce.bin',
 #   relaxVFile='Vforce.bin',
 #------------------------------------------------------------------------------
 #   rbcsIniter=0,
