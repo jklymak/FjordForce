@@ -295,10 +295,10 @@ if False:
 amp = 1   # m
 om = np.pi * 2 / 12.4 / 3600
 
-tidet = amp * np.sin( om * t ) * 9.81 * 1000 # kg m^-1 s^-2
+tidet = amp * np.sin( om * t ) * 9.81 * 1000  # kg m^-1 s^-2
 
 tidex = np.zeros(nx)
-tidex[x>=120] = 1.0  # I don't think there is any reason to be gentle for this forcing...
+tidex[x>=120e3] = 1.0  # I don't think there is any reason to be gentle for this forcing...
 
 tide = tidet[np.newaxis, :] * tidex[:, np.newaxis]
 with open(indir+'atmosphere.bin', 'wb') as f:
