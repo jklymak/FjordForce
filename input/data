@@ -23,7 +23,8 @@
  tAlpha=2.E-4,
  sBeta =7.4E-4,
  gravity=9.81,
- implicitFreeSurface=.TRUE.,
+ implicitFreeSurface=.FALSE.,
+ nonlinFreeSurf=4,
  exactConserv=.FALSE.
  rigidLid=.FALSE.
  nonHydrostatic=.FALSE.,

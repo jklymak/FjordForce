@@ -16,8 +16,8 @@ logging.basicConfig(level=logging.DEBUG)
 
 _log = logging.getLogger(__name__)
 
-runname='Fjord0'
-comments = """Lower res (dx=100, nz=20)"""
+runname='Fjord1'
+comments = """Lower res (dx=100, nz=20) Nonlinear Surf"""
 
 outdir0='../results/'+runname+'/'
 
