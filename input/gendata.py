@@ -16,8 +16,8 @@ logging.basicConfig(level=logging.DEBUG)
 
 _log = logging.getLogger(__name__)
 
-runname='Fjord4'
-comments = """Lower res (dx=100, nz=20) Atmopsheric Load; RBCS Compiled forcing"""
+runname='Fjord5'
+comments = """RBCS on but no eta"""
 
 outdir0='../results/'+runname+'/'
 
